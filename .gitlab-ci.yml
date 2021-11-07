@@ -4,17 +4,17 @@ stages:
 
 build-python-39:
   image: docker:20
-  stage: build
+  stage: build-python-39
   services:
     - docker:20-dind # docker in docker
-  when: manual
   rules:
-    - changes:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
+      changes:
         - python-39.Dockerfile
       when: always
-  only:
-    refs:
-      - main
+    - exists:
+        - python-39.Dockerfile
+      when: manual
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python:3.9 -f python-39.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python:3.9 .
