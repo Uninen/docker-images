@@ -1,0 +1,21 @@
+image: 'docker'
+stages:
+  - build-python-39
+
+build-python-39:
+  image: docker:20
+  stage: build
+  services:
+    - docker:20-dind # docker in docker
+  when: manual
+  rules:
+    - changes:
+        - python-39.Dockerfile
+      when: always
+  only:
+    refs:
+      - main
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python:3.9 -f python-39.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python:3.9 .
+    - docker push $CI_REGISTRY/uninen/docker-images/python:3.9
