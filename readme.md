@@ -6,3 +6,7 @@ This repo hosts the default base images I use in my projects. The idea is to kee
 
 docker build -f python-39.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.9 .
 docker push registry.gitlab.com/uninen/docker-images/python:3.9
+
+## TODO
+
+- Figure out build cache issue to be able to use caching w/ non-root images

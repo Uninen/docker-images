@@ -1,0 +1,12 @@
+FROM registry.gitlab.com/uninen/docker-images/python:3.9
+
+ENV DOCKER_BUILDKIT=1
+
+WORKDIR /code
+ADD . /code
+
+RUN --mount=type=cache,target=/root/.cache \
+    pip install -r requirements.txt
+
+CMD ["uvicorn", "--host", "0.0.0.0", "hello:app"]
+
