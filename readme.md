@@ -4,8 +4,13 @@ This repo hosts the default base images I use in my projects. The idea is to kee
 
 ## Building
 
-docker build -f python-39.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.9 .
+### Python
+docker build -f python-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.9 .
 docker push registry.gitlab.com/uninen/docker-images/python:3.9
+
+### Python-postgis
+docker build -f python-postgis-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.9 .
+docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.9
 
 ## TODO
 
