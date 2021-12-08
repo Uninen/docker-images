@@ -3,7 +3,7 @@ set -euo pipefail
 
 apt update 
 apt -y upgrade 
-apt -y install --no-install-recommends build-essential libpq-dev
+apt -y install --no-install-recommends build-essential libpq-dev curl
 pip install --upgrade pip --no-cache-dir
 apt-get remove -qq --allow-remove-essential --purge -y -qq
 apt-get autoremove -y
