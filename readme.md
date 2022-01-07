@@ -10,8 +10,10 @@ Contributions welcome!
 
 These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding non-root user, and basic dependencies needed for most Django projects.
 
-- `python:3.9` - Python 3.9 with build tools and PosgreSQL dependencies. Designed for Django. ~173 Mb
-- `python-postgis:3.9` - Python 3.9 with build tools and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango. ~226 Mb
+| Name | Description | Size |
+| --- | --- | --- |
+| `python:3.9` | Python with build tools and PosgreSQL dependencies. Designed for Django. | ~173&nbsp;Mb |
+| `python-postgis:3.9` | Python with build tools and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango. | ~226&nbsp;Mb |
 
 ## Using
 
