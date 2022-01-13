@@ -12,9 +12,8 @@ build-python-39:
       changes:
         - python-3.9.Dockerfile
       when: always
-    - exists:
-        - python-3.9.Dockerfile
-      when: manual
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: always
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python:3.9 -f python-3.9.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python:3.9 .
@@ -30,10 +29,26 @@ build-python-postgis-39:
       changes:
         - python-postgis-3.9.Dockerfile
       when: always
-    - exists:
-        - python-postgis-3.9.Dockerfile
-      when: manual
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: always
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python-postgis:3.9 -f python-postgis-3.9.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python-postgis:3.9 .
     - docker push $CI_REGISTRY/uninen/docker-images/python-postgis:3.9
+
+build-python-postgis-node-39:
+  image: docker:20
+  stage: build-python-39
+  services:
+    - docker:20-dind # docker in docker
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
+      changes:
+        - python-postgis-node-3.9.Dockerfile
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: always
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python-postgis-node:3.9 -f python-postgis-node-3.9.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python-postgis-node:3.9 .
+    - docker push $CI_REGISTRY/uninen/docker-images/python-postgis-node:3.9

@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN useradd --create-home duser
 
-COPY scripts/install-and-upgrade-postgis.sh .
-RUN ./install-and-upgrade-postgis.sh
+COPY scripts/install-deps-postgis.sh .
+RUN ./install-deps-postgis.sh
 
 CMD ["python"]

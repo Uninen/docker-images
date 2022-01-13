@@ -24,7 +24,8 @@ These images are based on [RevSys Python Builds](https://github.com/revsys/optim
 | Name | Description | Size |
 | --- | --- | --- |
 | `python:3.9` | Python with build tools and PosgreSQL dependencies. Designed for Django. | ~173&nbsp;Mb |
-| `python-postgis:3.9` | Python with build tools and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango. | ~226&nbsp;Mb |
+| `python-postgis:3.9` | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango. | ~226&nbsp;Mb |
+| `python-postgis-node:3.9` | Python with build tools, PosgreSQL + PostGIS dependencies, and Node 16 + yarn 1. Designed for CI / testing environments. | ~271&nbsp;Mb |
 
 ## Using
 
@@ -32,6 +33,7 @@ Use one of the following image sources:
 
 - `registry.gitlab.com/uninen/docker-images/python:3.9`
 - `registry.gitlab.com/uninen/docker-images/python-postgis:3.9`
+- `registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9`
 
 See `py-test-app/` for example usage in a project.
 
@@ -48,6 +50,13 @@ docker push registry.gitlab.com/uninen/docker-images/python:3.9
 ```sh
 docker build -f python-postgis-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.9 .
 docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.9
+```
+
+### python-postgis-node
+
+```sh
+docker build -f python-postgis-node-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9 .
+docker push registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9
 ```
 ## TODO
 
