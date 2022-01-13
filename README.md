@@ -28,7 +28,7 @@ These images are based on [RevSys Python Builds](https://github.com/revsys/optim
 
 ## Using
 
-Just use one of the following image sources:
+Use one of the following image sources:
 
 - `registry.gitlab.com/uninen/docker-images/python:3.9`
 - `registry.gitlab.com/uninen/docker-images/python-postgis:3.9`
