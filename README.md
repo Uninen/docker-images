@@ -42,20 +42,20 @@ See `py-test-app/` for example usage in a project.
 ### python
 
 ```sh
-docker build -f python-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.9 .
+docker build --progress=plain -f python-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.9 .
 docker push registry.gitlab.com/uninen/docker-images/python:3.9
 ```
 ### python-postgis
 
 ```sh
-docker build -f python-postgis-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.9 .
+docker build --progress=plain -f python-postgis-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.9 .
 docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.9
 ```
 
 ### python-postgis-node
 
 ```sh
-docker build -f python-postgis-node-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9 .
+docker build --progress=plain -f python-postgis-node-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9 .
 docker push registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9
 ```
 ## TODO
