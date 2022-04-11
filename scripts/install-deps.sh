@@ -3,7 +3,7 @@ set -euo pipefail
 
 apt update 
 apt -y upgrade 
-apt -y install --no-install-recommends apt-utils build-essential libpq-dev curl
+apt -y install --no-install-recommends apt-utils build-essential libpq-dev curl postgresql-client
 pip install --upgrade pip --no-cache-dir
 pip install pip-tools
 apt-get remove -qq --allow-remove-essential --purge -y -qq

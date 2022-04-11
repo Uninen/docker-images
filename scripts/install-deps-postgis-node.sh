@@ -3,7 +3,7 @@ set -euo pipefail
 
 apt update 
 apt -y upgrade 
-apt -y install --no-install-recommends apt-utils build-essential libpq-dev binutils libproj-dev gdal-bin curl ca-certificates
+apt -y install --no-install-recommends apt-utils build-essential libpq-dev binutils libproj-dev gdal-bin curl ca-certificates postgresql-client
 curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 apt-get install -y nodejs
 npm install --global yarn
