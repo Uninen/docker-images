@@ -23,7 +23,7 @@ These images are based on [RevSys Python Builds](https://github.com/revsys/optim
 
 | Name | Description | Size |
 | --- | --- | --- |
-| `python:3.10.4` | Python with build tools and PosgreSQL dependencies. Designed for Django. | ~183&nbsp;Mb |
+| `python:3.10.4` | Python with build tools and PosgreSQL dependencies. Designed for Django. | ~176&nbsp;Mb |
 | `python-postgis:3.10.4` | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango. | ~228&nbsp;Mb |
 | `python-postgis-node:3.9` | Python with build tools, PosgreSQL + PostGIS dependencies, and Node 16 + yarn 1. Designed for CI / testing environments. | ~280&nbsp;Mb |
 
