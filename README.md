@@ -21,10 +21,10 @@ See `sripts/` for details of the actual preinstalled packages.
 
 These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding non-root user, and basic dependencies needed for most Django projects.
 
-| Name | Description | Size |
-| --- | --- | --- |
-| `python:3.10.4` | Python with build tools and PosgreSQL dependencies. Designed for Django. | ~176&nbsp;Mb |
-| `python-postgis:3.10.4` | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango. | ~228&nbsp;Mb |
+| Name                      | Description                                                                                                              | Size         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| `python:3.10.4`           | Python with build tools and PosgreSQL dependencies. Designed for Django.                                                 | ~176&nbsp;Mb |
+| `python-postgis:3.10.4`   | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                          | ~228&nbsp;Mb |
 | `python-postgis-node:3.9` | Python with build tools, PosgreSQL + PostGIS dependencies, and Node 16 + yarn 1. Designed for CI / testing environments. | ~280&nbsp;Mb |
 
 ## Using
@@ -45,11 +45,12 @@ See `py-test-app/` for example usage in a project.
 docker build --progress=plain -f python-3.10.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.10.4 .
 docker push registry.gitlab.com/uninen/docker-images/python:3.10.4
 ```
+
 ### python-postgis
 
 ```sh
-docker build --progress=plain -f python-postgis-3.10.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.10.4 .
-docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.10.4
+docker build --progress=plain -f python-postgis-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.11.0 .
+docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.11.0
 ```
 
 ### python-postgis-node
@@ -58,6 +59,7 @@ docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.10.4
 docker build --progress=plain -f python-postgis-node-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9 .
 docker push registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9
 ```
+
 ## TODO
 
 - Figure out build cache issue to be able to use caching w/ non-root images (see [./py-test-app/Dockerfile](./py-test-app/Dockerfile))
@@ -66,6 +68,6 @@ docker push registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9
 
 [MIT](./LICENCE)
 
-----
+---
 
 Follow [@Uninen on Twitter](https://twitter.com/uninen) | [GitHub](https://github.com/Uninen)
