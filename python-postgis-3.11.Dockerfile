@@ -1,4 +1,4 @@
-FROM revolutionsystems/python:3.11.1-wee-optimized-lto
+FROM revolutionsystems/python:3.11.1-wee-lto-optimized
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1

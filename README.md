@@ -49,8 +49,8 @@ docker push registry.gitlab.com/uninen/docker-images/python:3.10.4
 ### python-postgis
 
 ```sh
-docker build --progress=plain -f python-postgis-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.11.0 .
-docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.11.0
+docker build --progress=plain -f python-postgis-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.11.1 .
+docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.11.1
 ```
 
 ### python-postgis-node
