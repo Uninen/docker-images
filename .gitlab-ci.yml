@@ -1,27 +1,27 @@
 image: 'docker'
 stages:
-  - build-python-39
+  - build-python
 
-build-python-39:
+build-python-310:
   image: docker:20
-  stage: build-python-39
+  stage: build-python
   services:
     - docker:20-dind # docker in docker
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
       changes:
-        - python-3.9.Dockerfile
+        - python-3.10.Dockerfile
       when: always
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: always
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python:3.9 -f python-3.9.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python:3.9 .
+    - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python:3.10 -f python-3.10.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python:3.10 .
     - docker push $CI_REGISTRY/uninen/docker-images/python:3.9
 
 build-python-postgis-39:
   image: docker:20
-  stage: build-python-39
+  stage: build-python
   services:
     - docker:20-dind # docker in docker
   rules:
@@ -38,7 +38,7 @@ build-python-postgis-39:
 
 build-python-postgis-node-39:
   image: docker:20
-  stage: build-python-39
+  stage: build-python
   services:
     - docker:20-dind # docker in docker
   rules:

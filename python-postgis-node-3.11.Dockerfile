@@ -1,4 +1,4 @@
-FROM revolutionsystems/python:3.10-wee-optimized-lto
+FROM revolutionsystems/python:3.11-wee-lto-optimized
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN useradd --create-home duser
 
-COPY scripts/install-deps-postgis.sh .
-RUN ./install-deps-postgis.sh
+COPY scripts/install-deps-postgis-node.sh .
+RUN ./install-deps-postgis-node.sh
 
 CMD ["python"]

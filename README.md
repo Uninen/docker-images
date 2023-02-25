@@ -14,6 +14,7 @@ Contributions welcome!
 - Non-root user
 - Python-related environment variables and paths set
 - Latest `pip` + essential system packages preinstalled
+- Built for linux/amd64 and linux/arm64 platforms
 
 See `sripts/` for details of the actual preinstalled packages.
 
@@ -21,19 +22,21 @@ See `sripts/` for details of the actual preinstalled packages.
 
 These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding non-root user, and basic dependencies needed for most Django projects.
 
-| Name                      | Description                                                                                                              | Size         |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------ |
-| `python:3.10.4`           | Python with build tools and PosgreSQL dependencies. Designed for Django.                                                 | ~176&nbsp;Mb |
-| `python-postgis:3.10.4`   | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                          | ~228&nbsp;Mb |
-| `python-postgis-node:3.9` | Python with build tools, PosgreSQL + PostGIS dependencies, and Node 16 + yarn 1. Designed for CI / testing environments. | ~280&nbsp;Mb |
+| Name                       | Description                                                                                                            | Size         |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `python:3.10.4`            | Python with build tools and PosgreSQL dependencies. Designed for Django.                                               | ~176&nbsp;Mb |
+| `python-postgis:3.11`      | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                        | ~234&nbsp;Mb |
+| `python-postgis-node:3.11` | Python with build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. Designed for CI / testing environments. | ~280&nbsp;Mb |
+| `python-postgis-node-dev`  | Development image based on `python-postgis-node` with git + dev packages added. Designed for developing + testing.     | ~451&nbsp;Mb |
 
 ## Using
 
 Use one of the following image sources:
 
 - `registry.gitlab.com/uninen/docker-images/python:3.10.4`
-- `registry.gitlab.com/uninen/docker-images/python-postgis:3.10.4`
-- `registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9`
+- `registry.gitlab.com/uninen/docker-images/python-postgis:3.11`
+- `registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11`
+- `registry.gitlab.com/uninen/docker-images/python-postgis-node-dev:latest`
 
 See `py-test-app/` for example usage in a project.
 
@@ -49,15 +52,23 @@ docker push registry.gitlab.com/uninen/docker-images/python:3.10.4
 ### python-postgis
 
 ```sh
-docker buildx build --platform linux/amd64 --progress=plain -f python-postgis-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.11.1 .
+docker buildx create --name builder --driver docker-container --use
+docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-postgis-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.11.1 .
 docker push registry.gitlab.com/uninen/docker-images/python-postgis:3.11.1
 ```
 
 ### python-postgis-node
 
 ```sh
-docker build --progress=plain -f python-postgis-node-3.9.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9 .
-docker push registry.gitlab.com/uninen/docker-images/python-postgis-node:3.9
+docker buildx create --use
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11 --provenance false --push .
+```
+
+### python-postgis-node-dev
+
+```sh
+docker buildx create --use
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-dev.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node-dev:latest --provenance false --push .
 ```
 
 ## TODO
