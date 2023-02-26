@@ -7,7 +7,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBIAN_FRONTEND=dialog
 
-COPY scripts/install-audiowaveform.sh .
 COPY scripts/install-dev-deps.sh .
 RUN ./install-dev-deps.sh
 
