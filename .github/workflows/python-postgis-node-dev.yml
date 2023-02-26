@@ -2,13 +2,9 @@ name: Dev
 
 on:
   workflow_run:
-    workflows: [Python 3.11 + Postgis + Node]
+    workflows: [311-postgis-node]
     types: [completed]
   workflow_dispatch:
-
-concurrency:
-  group: front-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
 
 jobs:
   build_and_push:

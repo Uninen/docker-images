@@ -10,7 +10,7 @@ Contributions welcome!
 
 - Slimmer than `python` base images but still include production deps
 - Built for **linux/amd64 and linux/arm64 platforms**
-- Latest `pip`, `pip-tools`, and essential system packages preinstalled
+- Latest `pip`, `pip-tools`, PostgreSQL 15 client and essential system packages preinstalled
 - Non-root `duser` user added (homet at `/home/duser/`)
 - Python-related environment variables and paths set
 - Python built with PGO + Link-Time-Optimization flags
