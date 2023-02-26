@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows: [311-postgis-node]
     types: [completed]
+  workflow_call:
   workflow_dispatch:
 
 jobs:
