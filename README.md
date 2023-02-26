@@ -6,8 +6,6 @@ The images are regularly re-built to keep up with **security updates**. Combine 
 
 Contributions welcome!
 
-<small>(Note: this repo moved from GitLab to GitHub in 2/2023 and the GH action scripts are still a work in progress.)</small>
-
 ## Features
 
 - Slimmer than `python-slim`

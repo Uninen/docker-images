@@ -5,6 +5,7 @@ ENV PATH="/root/.local/bin:${PATH}"
 ENV PYTHONPATH="/root/.local/lib:/code/:/code/pylib:${PYTONPATH}"
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV DEBIAN_FRONTEND=dialog
 
 COPY scripts/install-audiowaveform.sh .
 COPY scripts/install-dev-deps.sh .
