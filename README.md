@@ -22,12 +22,12 @@ See `sripts/` for details of the actual preinstalled packages.
 
 ## Images
 
-| Name                       | Description                                                                                                            | Size         |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `python:3.10`              | Python with build tools and PosgreSQL dependencies. Designed for Django.                                               | ~176&nbsp;Mb |
-| `python-postgis:3.11`      | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                        | ~234&nbsp;Mb |
-| `python-postgis-node:3.11` | Python with build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. Designed for CI / testing environments. | ~280&nbsp;Mb |
-| `python-postgis-node-dev`  | Development image based on `python-postgis-node` with git + dev packages added. Designed for developing + testing.     | ~451&nbsp;Mb |
+| Name                       | Description                                                                                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `python:3.10`              | Python, build tools, PosgreSQL dependencies. Designed for Django.                                                  |
+| `python-postgis:3.11`      | Python, build tools, PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                            |
+| `python-postgis-node:3.11` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. Designed for CI / testing environments. |
+| `python-postgis-node-dev`  | Development image based on `python-postgis-node` with git + dev packages added. Designed for developing + testing. |
 
 ## Using
 
