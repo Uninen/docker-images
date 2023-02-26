@@ -1,20 +1,20 @@
-name: Dev
+name: Python 3.11 + Postgis + Node
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/python-postgis-node-dev.yml
-      - python-postgis-node-dev.Dockerfile
+      - .github/workflows/python-postgis-node-3.11.yml
+      - python-postgis-node-3.11.Dockerfile
       - scripts/install-audiowaveform.sh
-      - scripts/install-dev-deps.sh
+      - scripts/install-deps-postgis-node.sh
   pull_request:
     paths:
-      - .github/workflows/python-postgis-node-dev.yml
-      - python-postgis-node-dev.Dockerfile
+      - .github/workflows/python-postgis-node-3.11.yml
+      - python-postgis-node-3.11.Dockerfile
       - scripts/install-audiowaveform.sh
-      - scripts/install-dev-deps.sh
+      - scripts/install-deps-postgis-node.sh
   workflow_dispatch:
 
 concurrency:
@@ -37,7 +37,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file: python-postgis-node-dev.Dockerfile
+          file: python-postgis-node-3.11.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: uninen/python-postgis-node-dev:latest
+          tags: uninen/python-postgis-node:3.11

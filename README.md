@@ -33,8 +33,8 @@ Use one of the following image sources:
 
 - `uninen/python:3.11`
 - `uninen/python-postgis:3.11`
-- `registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11`
-- `registry.gitlab.com/uninen/docker-images/python-postgis-node-dev:latest`
+- `uninen/python-postgis-node:3.11`
+- `uninen/python-postgis-node-dev:latest`
 
 See `py-test-app/` for example usage in a project.
 

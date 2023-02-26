@@ -1,4 +1,4 @@
-name: Python 3.11 Postgis
+name: Python 3.11 + Postgis
 
 on:
   push:
@@ -7,11 +7,13 @@ on:
     paths:
       - .github/workflows/python-postgis-3.11.yml
       - python-postgis-3.11.Dockerfile
+      - scripts/install-audiowaveform.sh
       - scripts/install-deps-postgis.sh
   pull_request:
     paths:
       - .github/workflows/python-postgis-3.11.yml
       - python-postgis-3.11.Dockerfile
+      - scripts/install-audiowaveform.sh
       - scripts/install-deps-postgis.sh
   workflow_dispatch:
 
