@@ -1,20 +1,7 @@
 name: Dev
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/python-postgis-node-dev.yml
-      - python-postgis-node-dev.Dockerfile
-      - scripts/install-audiowaveform.sh
-      - scripts/install-dev-deps.sh
-  pull_request:
-    paths:
-      - .github/workflows/python-postgis-node-dev.yml
-      - python-postgis-node-dev.Dockerfile
-      - scripts/install-audiowaveform.sh
-      - scripts/install-dev-deps.sh
+  workflow_call:
   workflow_dispatch:
 
 concurrency:

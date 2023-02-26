@@ -1,6 +1,6 @@
 # Docker Images
 
-These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python Vue projects. The images are designed to be light, yet complete and secure enough **for production**.
+These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be light, yet complete and secure enough **for production**.
 
 The images are regularly re-built to keep up with **security updates**. Combine with automatically polled image updates in your production (for example with [Traefik](https://traefik.io/) + [Watchtower](https://containrrr.dev/watchtower/)) and you get automatic security updates in production.
 
@@ -16,7 +16,7 @@ Contributions welcome!
 - Python built with PGO + Link-Time-Optimization flags
 - Based on Debian 10.13 (buster) base image
 
-See `sripts/` for details of the actual preinstalled packages.
+See [sripts/](scripts/) for details of the actual preinstalled packages.
 
 ## Images
 
@@ -38,7 +38,7 @@ Use one of the following image sources:
 
 See `py-test-app/` for example usage in a project.
 
-## Building
+## Building Manually
 
 ### python (tags: 3.10, 3.11)
 
@@ -58,20 +58,20 @@ docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f pytho
 
 ```sh
 docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t uninen/python-postgis-node:3.11 --provenance false --push .
 ```
 
 ### python-postgis-node-dev (tags: latest)
 
 ```sh
 docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-dev.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node-dev:latest --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-dev.Dockerfile -t uninen/python-postgis-node-dev:latest --provenance false --push .
 ```
 
 ## TODO
 
-- Figure out build cache issue to be able to use caching w/ non-root images (see [./py-test-app/Dockerfile](./py-test-app/Dockerfile))
-- Add base images to separate audio-related packages
+- Figure out build cache issue to be able to use caching w/ non-root images (see [py-test-app/Dockerfile](./py-test-app/Dockerfile))
+- Add base images to separate audio-related packages (ffmpeg, audiowaveform)
 
 ## License
 

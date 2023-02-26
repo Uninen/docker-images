@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11
+FROM uninen/python-postgis-node:3.11
 
 ENV DOCKER_BUILDKIT=1
 ENV PATH="/root/.local/bin:${PATH}"
