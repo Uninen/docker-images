@@ -6,6 +6,8 @@ apt -y upgrade
 apt -y install --no-install-recommends apt-utils build-essential libpq-dev binutils libproj-dev gdal-bin curl ca-certificates postgresql-client
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install -y nodejs
+./install-audiowaveform.sh
+npx playwright install-deps
 npm install --global pnpm
 pip install --upgrade pip --no-cache-dir
 pip install pip-tools

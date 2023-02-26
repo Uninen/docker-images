@@ -19,7 +19,7 @@ build-python-310:
     - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python:3.10 -f python-3.10.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python:3.10 .
     - docker push $CI_REGISTRY/uninen/docker-images/python:3.9
 
-build-python-postgis-39:
+build-python-postgis-311:
   image: docker:20
   stage: build-python
   services:
@@ -27,16 +27,18 @@ build-python-postgis-39:
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
       changes:
-        - python-postgis-3.9.Dockerfile
+        - scripts/install-audiowaveform.sh
+        - scripts/install-deps-postgis.sh
+        - python-postgis-3.11.Dockerfile
       when: always
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: always
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python-postgis:3.9 -f python-postgis-3.9.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python-postgis:3.9 .
-    - docker push $CI_REGISTRY/uninen/docker-images/python-postgis:3.9
+    - docker buildx create --use
+    - docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-postgis-3.11.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python-postgis:3.11 --provenance false --push .
 
-build-python-postgis-node-39:
+build-python-postgis-node-311:
   image: docker:20
   stage: build-python
   services:
@@ -44,11 +46,13 @@ build-python-postgis-node-39:
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
       changes:
-        - python-postgis-node-3.9.Dockerfile
+        - scripts/install-audiowaveform.sh
+        - scripts/install-deps-postgis-node.sh
+        - python-postgis-node-3.11.Dockerfile
       when: always
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: always
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --cache-from $CI_REGISTRY/uninen/docker-images/python-postgis-node:3.9 -f python-postgis-node-3.9.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python-postgis-node:3.9 .
-    - docker push $CI_REGISTRY/uninen/docker-images/python-postgis-node:3.9
+    - docker buildx create --use
+    - docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-postgis-node-3.11.Dockerfile -t $CI_REGISTRY/uninen/docker-images/python-postgis-node:3.11 --provenance false --push .
