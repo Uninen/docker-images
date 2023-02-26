@@ -1,0 +1,46 @@
+name: 311-postgis-node
+run-name: Python 3.11 + Postgis + Node
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/python-postgis-node-3.11.yml
+      - python-postgis-node-3.11.Dockerfile
+      - scripts/install-audiowaveform.sh
+      - scripts/install-deps-postgis-node.sh
+  pull_request:
+    paths:
+      - .github/workflows/python-postgis-node-3.11.yml
+      - python-postgis-node-3.11.Dockerfile
+      - scripts/install-audiowaveform.sh
+      - scripts/install-deps-postgis-node.sh
+  schedule:
+    - cron: 55 5 22 * * # every 22nd on 5.55 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: front-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          file: python-postgis-node-3.11.Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: uninen/python-postgis-node:3.11

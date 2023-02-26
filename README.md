@@ -1,79 +1,77 @@
 # Docker Images
 
-These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python Vue projects. The images are designed to be light, yet complete and secure enough **for production**.
+These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be light, yet complete and secure enough **for production**.
 
 The images are regularly re-built to keep up with **security updates**. Combine with automatically polled image updates in your production (for example with [Traefik](https://traefik.io/) + [Watchtower](https://containrrr.dev/watchtower/)) and you get automatic security updates in production.
 
 Contributions welcome!
 
-<small>(Note: this repo moved from GitLab to GitHub in 2/2023 and the GH action scripts are still a work in progress.)</small>
-
 ## Features
 
-- Slimmer than `python-slim`
-- Built for **amd64 and arm64 platforms**
+- Slimmer than `python` base images but still include production deps
+- Built for **linux/amd64 and linux/arm64 platforms**
+- Latest `pip`, `pip-tools`, PostgreSQL 15 client and essential system packages preinstalled
+- Non-root `duser` user added (homet at `/home/duser/`)
 - Python-related environment variables and paths set
-- Latest `pip` + essential system packages preinstalled
-- Non-root user
 - Python built with PGO + Link-Time-Optimization flags
-- Based on Debian 11.6 (bullseye) base image
+- Based on Debian 10.13 (buster) base image
 
-See `sripts/` for details of the actual preinstalled packages.
+See [sripts/](scripts/) for details of the actual preinstalled packages.
 
 ## Images
 
-| Name                       | Description                                                                                                            | Size         |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `python:3.10`              | Python with build tools and PosgreSQL dependencies. Designed for Django.                                               | ~176&nbsp;Mb |
-| `python-postgis:3.11`      | Python with build tools, and PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                        | ~234&nbsp;Mb |
-| `python-postgis-node:3.11` | Python with build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. Designed for CI / testing environments. | ~280&nbsp;Mb |
-| `python-postgis-node-dev`  | Development image based on `python-postgis-node` with git + dev packages added. Designed for developing + testing.     | ~451&nbsp;Mb |
+| Name                      | Description                                                                |
+| ------------------------- | -------------------------------------------------------------------------- |
+| `python`                  | Python, build tools, PosgreSQL dependencies.                               |
+| `python-postgis`          | Python, build tools, PosgreSQL + PostGIS dependencies.                     |
+| `python-postgis-node `    | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. |
+| `python-postgis-node-dev` | Development image based on `python-postgis-node` with git + dev packages.  |
 
 ## Using
 
 Use one of the following image sources:
 
-- `registry.gitlab.com/uninen/docker-images/python:3.10`
-- `registry.gitlab.com/uninen/docker-images/python-postgis:3.11`
-- `registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11`
-- `registry.gitlab.com/uninen/docker-images/python-postgis-node-dev:latest`
+- `uninen/python:3.11`
+- `uninen/python-postgis:3.11`
+- `uninen/python-postgis-node:3.11`
+- `uninen/python-postgis-node-dev:latest`
 
 See `py-test-app/` for example usage in a project.
 
-## Building
+## Building Manually
 
-### python
+### python (tags: 3.10, 3.11)
 
 ```sh
 docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.11 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-3.11.Dockerfile -t uninen/python:3.11 --provenance false --push .
 ```
 
-### python-postgis
+### python-postgis (tags: 3.11)
 
 ```sh
 docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-postgis-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.11 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-postgis-3.11.Dockerfile -t uninen/python-postgis:3.11 --provenance false --push .
 ```
 
-### python-postgis-node
+### python-postgis-node (tags: 3.11)
 
 ```sh
 docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t uninen/python-postgis-node:3.11 --provenance false --push .
 ```
 
-### python-postgis-node-dev
+### python-postgis-node-dev (tags: latest)
 
 ```sh
 docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-dev.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node-dev:latest --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-dev.Dockerfile -t uninen/python-postgis-node-dev:latest --provenance false --push .
 ```
 
 ## TODO
 
-- Figure out build cache issue to be able to use caching w/ non-root images (see [./py-test-app/Dockerfile](./py-test-app/Dockerfile))
-- Add base images to separate audio-related packages
+- Figure out build cache issue to be able to use caching w/ non-root images (see [py-test-app/Dockerfile](./py-test-app/Dockerfile))
+- Add base images to separate audio-related packages (ffmpeg, audiowaveform)
 
 ## License
 

@@ -6,6 +6,7 @@ apt -y upgrade
 apt-get install -y build-essential git make cmake gcc g++ libmad0-dev libid3tag0-dev libsndfile1-dev libgd-dev \
     libboost-filesystem-dev libboost-program-options-dev libboost-regex-dev 
 
+rm -rf audiowaveform
 git clone https://github.com/bbc/audiowaveform.git
 cd audiowaveform
 
