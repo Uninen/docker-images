@@ -1,18 +1,18 @@
-name: Dev
+name: Python 3.11 Postgis
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/python-postgis-node-dev.yml
-      - python-postgis-node-dev.Dockerfile
-      - scripts/install-dev-deps.sh
+      - .github/workflows/python-postgis-3.11.yml
+      - python-postgis-3.11.Dockerfile
+      - scripts/install-deps-postgis.sh
   pull_request:
     paths:
-      - .github/workflows/python-postgis-node-dev.yml
-      - python-postgis-node-dev.Dockerfile
-      - scripts/install-dev-deps.sh
+      - .github/workflows/python-postgis-3.11.yml
+      - python-postgis-3.11.Dockerfile
+      - scripts/install-deps-postgis.sh
   workflow_dispatch:
 
 concurrency:
@@ -35,7 +35,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file: python-postgis-node-dev.Dockerfile
+          file: python-postgis-3.11.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: uninen/python-postgis-node-dev:latest
+          tags: uninen/python-postgis:3.11
