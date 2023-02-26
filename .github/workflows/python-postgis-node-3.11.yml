@@ -43,6 +43,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: uninen/python-postgis-node:3.11
-      - name: Build Dev Image
-        uses: Uninen/docker-images/.github/workflows/python-postgis-node-dev.yml
-        if: success()
