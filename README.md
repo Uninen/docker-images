@@ -20,18 +20,18 @@ See `sripts/` for details of the actual preinstalled packages.
 
 ## Images
 
-| Name                       | Description                                                                                                        |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `python:3.10`              | Python, build tools, PosgreSQL dependencies. Designed for Django.                                                  |
-| `python-postgis:3.11`      | Python, build tools, PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                            |
-| `python-postgis-node:3.11` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. Designed for CI / testing environments. |
-| `python-postgis-node-dev`  | Development image based on `python-postgis-node` with git + dev packages added. Designed for developing + testing. |
+| Name                      | Description                                                                                                        |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `python`                  | Python, build tools, PosgreSQL dependencies. Designed for Django.                                                  |
+| `python-postgis`          | Python, build tools, PosgreSQL + PostGIS dependencies. Designed for Django + GeoDjango.                            |
+| `python-postgis-node `    | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. Designed for CI / testing environments. |
+| `python-postgis-node-dev` | Development image based on `python-postgis-node` with git + dev packages added. Designed for developing + testing. |
 
 ## Using
 
 Use one of the following image sources:
 
-- `registry.gitlab.com/uninen/docker-images/python:3.10`
+- `registry.gitlab.com/uninen/docker-images/python:3.11`
 - `registry.gitlab.com/uninen/docker-images/python-postgis:3.11`
 - `registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11`
 - `registry.gitlab.com/uninen/docker-images/python-postgis-node-dev:latest`
@@ -40,28 +40,28 @@ See `py-test-app/` for example usage in a project.
 
 ## Building
 
-### python
+### python (tags: 3.10, 3.11)
 
 ```sh
 docker buildx create --use
 docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python:3.11 --provenance false --push .
 ```
 
-### python-postgis
+### python-postgis (tags: 3.11)
 
 ```sh
 docker buildx create --use
 docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-postgis-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis:3.11 --provenance false --push .
 ```
 
-### python-postgis-node
+### python-postgis-node (tags: 3.11)
 
 ```sh
 docker buildx create --use
 docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t registry.gitlab.com/uninen/docker-images/python-postgis-node:3.11 --provenance false --push .
 ```
 
-### python-postgis-node-dev
+### python-postgis-node-dev (tags: latest)
 
 ```sh
 docker buildx create --use
