@@ -1,4 +1,4 @@
-name: 311-postgis-node
+name: push-311-postgis-node
 run-name: Python 3.11 + Postgis + Node
 
 on:
@@ -10,19 +10,9 @@ on:
       - python-postgis-node-3.11.Dockerfile
       - scripts/install-audiowaveform.sh
       - scripts/install-deps-postgis-node.sh
-  pull_request:
-    paths:
-      - .github/workflows/python-postgis-node-3.11.yml
-      - python-postgis-node-3.11.Dockerfile
-      - scripts/install-audiowaveform.sh
-      - scripts/install-deps-postgis-node.sh
   schedule:
-    - cron: 55 5 22 * * # every 22nd on 5.55 UTC
+    - cron: 5 6 22 * * # every 22nd on 5.55 UTC
   workflow_dispatch:
-
-concurrency:
-  group: front-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
 
 jobs:
   build_and_push:

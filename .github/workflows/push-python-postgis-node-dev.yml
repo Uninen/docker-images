@@ -1,29 +1,16 @@
-name: Python 3.11
+name: Dev
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/python-3.11.yml
-      - python-3.11.Dockerfile
-      - scripts/install-deps.sh
-  pull_request:
-    paths:
-      - .github/workflows/python-3.11.yml
-      - python-3.11.Dockerfile
-      - scripts/install-deps.sh
-  schedule:
-    - cron: 55 5 22 * * # every 22nd on 5.55 UTC
+  workflow_run:
+    workflows: [push-311-postgis-node]
+    types: [completed]
+  workflow_call:
   workflow_dispatch:
-
-concurrency:
-  group: front-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
 
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -37,7 +24,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file: python-3.11.Dockerfile
+          file: python-postgis-node-dev.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: uninen/python:3.11
+          tags: uninen/python-postgis-node-dev:latest
