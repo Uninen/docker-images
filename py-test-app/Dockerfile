@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/uninen/docker-images/python:3.9
+FROM uninen/python:3.11
 
 ENV DOCKER_BUILDKIT=1
 

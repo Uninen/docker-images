@@ -9,19 +9,9 @@ on:
       - python-postgis-3.11.Dockerfile
       - scripts/install-audiowaveform.sh
       - scripts/install-deps-postgis.sh
-  pull_request:
-    paths:
-      - .github/workflows/python-postgis-3.11.yml
-      - python-postgis-3.11.Dockerfile
-      - scripts/install-audiowaveform.sh
-      - scripts/install-deps-postgis.sh
   schedule:
-    - cron: 55 5 22 * * # every 22nd on 5.55 UTC
+    - cron: 59 5 22 * * # every 22nd on 5.55 UTC
   workflow_dispatch:
-
-concurrency:
-  group: front-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
 
 jobs:
   build_and_push:

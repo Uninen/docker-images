@@ -2,6 +2,7 @@ FROM revolutionsystems/python:3.11.1-wee-lto-optimized
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+ENV DOCKER_BUILDKIT=1
 ENV PATH="/home/duser/.local/bin:${PATH}"
 ENV PYTHONPATH="/home/duser/.local/lib:${PYTONPATH}"
 ENV DEBIAN_FRONTEND=noninteractive
