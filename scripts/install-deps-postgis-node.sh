@@ -10,10 +10,10 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt update 
 apt-get install -y nodejs postgresql-client
 ./install-audiowaveform.sh
-npx playwright install-deps
 npm install --global pnpm
 pip install --upgrade pip --no-cache-dir
-pip install pip-tools
+pip install pip-tools playwright
+playwright install --with-deps firefox
 apt-get remove -y build-essential git make cmake gcc g++
 apt-get remove -qq --allow-remove-essential --purge -y -qq
 apt-get autoremove -y
