@@ -1,4 +1,4 @@
-name: Dev
+name: push-311-postgis-node-dev
 
 on:
   workflow_run:
