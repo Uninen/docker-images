@@ -24,7 +24,7 @@ See [sripts/](scripts/) for details of the actual preinstalled packages.
 | ------------------------- | -------------------------------------------------------------------------- |
 | `python`                  | Python, build tools, PosgreSQL dependencies.                               |
 | `python-postgis`          | Python, build tools, PosgreSQL + PostGIS dependencies.                     |
-| `python-postgis-node `    | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 18 + pnpm. |
+| `python-postgis-node `    | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm. |
 | `python-postgis-node-dev` | Development image based on `python-postgis-node` with git + dev packages.  |
 
 ## Using
