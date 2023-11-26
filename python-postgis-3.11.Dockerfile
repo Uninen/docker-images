@@ -7,7 +7,7 @@ ENV PATH="/home/duser/.local/bin:${PATH}"
 ENV PYTHONPATH="/home/duser/.local/lib:${PYTONPATH}"
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN useradd --create-home duser
+RUN useradd -m -s /bin/bash duser
 
 COPY scripts/install-audiowaveform.sh .
 COPY scripts/install-deps-postgis.sh .
