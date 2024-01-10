@@ -10,11 +10,11 @@ Contributions welcome!
 
 - Slimmer than `python` base images but still include production deps
 - Built for **linux/amd64 and linux/arm64 platforms**
-- Latest `pip`, `pip-tools`, PostgreSQL 15 client and essential system packages preinstalled
+- Latest `pip`, `pip-tools`, PostgreSQL 16 client and essential system packages preinstalled
 - Non-root `duser` user added (homet at `/home/duser/`)
 - Python-related environment variables and paths set
 - Python built with PGO + Link-Time-Optimization flags
-- Based on Debian 10.13 (buster) base image
+- Based on Debian 12 (bookwork) base image
 
 See [sripts/](scripts/) for details of the actual preinstalled packages.
 
@@ -70,7 +70,6 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-de
 
 ## TODO
 
-- Figure out build cache issue to be able to use caching w/ non-root images (see [py-test-app/Dockerfile](./py-test-app/Dockerfile))
 - Add base images to separate audio-related packages (ffmpeg, audiowaveform)
 
 ## License
