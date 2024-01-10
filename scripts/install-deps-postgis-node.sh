@@ -14,7 +14,6 @@ npm install --global pnpm
 pip install --upgrade pip --no-cache-dir
 pip install pip-tools playwright
 playwright install --with-deps firefox
-apt-get remove -y build-essential git make cmake gcc g++
 apt-get remove -qq --allow-remove-essential --purge -y -qq
 apt-get autoremove -y
 apt-get clean -y
