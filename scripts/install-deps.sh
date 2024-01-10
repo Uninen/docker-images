@@ -3,7 +3,7 @@ set -euo pipefail
 
 apt update 
 apt -y upgrade 
-apt -y install --no-install-recommends apt-utils build-essential libpq-dev curl gcc git wget
+apt -y install --no-install-recommends apt-utils build-essential libpq-dev curl gcc git wget software-properties-common gnupg gnupg2 apt-transport-https
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 apt update 
