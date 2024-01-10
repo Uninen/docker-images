@@ -1,4 +1,4 @@
-name: Python 3.11 + Postgis
+name: Build Python 3.11 + Postgis
 
 on:
   pull_request:

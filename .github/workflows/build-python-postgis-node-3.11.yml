@@ -1,5 +1,5 @@
 name: build-311-postgis-node
-run-name: Python 3.11 + Postgis + Node
+run-name: Build Python 3.11 + Postgis + Node
 
 on:
   pull_request:
