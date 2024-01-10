@@ -14,7 +14,7 @@ Contributions welcome!
 - Non-root `duser` user added (homet at `/home/duser/`)
 - Python-related environment variables and paths set
 - Python built with PGO + Link-Time-Optimization flags
-- Based on Debian 12 (bookwork) base image
+- Based on Debian 12 (bookworm) base image
 
 See [sripts/](scripts/) for details of the actual preinstalled packages.
 
