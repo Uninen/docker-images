@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/python-3.11.yml
+      - .github/workflows/push-python-3.11.yml
       - python-3.11.Dockerfile
       - scripts/install-deps.sh
   schedule:

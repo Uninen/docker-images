@@ -3,7 +3,7 @@ name: Build Python 3.11
 on:
   pull_request:
     paths:
-      - .github/workflows/python-3.11.yml
+      - .github/workflows/build-python-3.11.yml
       - python-3.11.Dockerfile
       - scripts/install-deps.sh
 

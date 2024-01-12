@@ -3,7 +3,7 @@ name: Build Python 3.11 + Postgis
 on:
   pull_request:
     paths:
-      - .github/workflows/python-postgis-3.11.yml
+      - .github/workflows/build-python-postgis-3.11.yml
       - python-postgis-3.11.Dockerfile
       - scripts/install-audiowaveform.sh
       - scripts/install-deps-postgis.sh

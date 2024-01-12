@@ -22,6 +22,7 @@ See [sripts/](scripts/) for details of the actual preinstalled packages.
 
 | Name                      | Description                                                                |
 | ------------------------- | -------------------------------------------------------------------------- |
+| `node`                    | Node 20, latest pnpm 8 installed via corepack.                             |
 | `python`                  | Python, build tools, PosgreSQL dependencies.                               |
 | `python-postgis`          | Python, build tools, PosgreSQL + PostGIS dependencies.                     |
 | `python-postgis-node `    | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm. |
@@ -31,6 +32,7 @@ See [sripts/](scripts/) for details of the actual preinstalled packages.
 
 Use one of the following image sources:
 
+- `uninen/node:20`
 - `uninen/python:3.11`
 - `uninen/python-postgis:3.11`
 - `uninen/python-postgis-node:3.11`
@@ -66,6 +68,13 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.
 ```sh
 docker buildx create --use
 docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-dev.Dockerfile -t uninen/python-postgis-node-dev:latest --provenance false --push .
+```
+
+### node (tags: 20)
+
+```sh
+docker buildx create --use
+docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f node-20.Dockerfile -t uninen/node:20 --provenance false --push .
 ```
 
 ## TODO

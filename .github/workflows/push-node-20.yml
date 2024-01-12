@@ -1,17 +1,14 @@
-name: push-311-postgis
-run-name: Push Python 3.11 + Postgis
+name: Push Node 20
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/push-python-postgis-3.11.yml
-      - python-postgis-3.11.Dockerfile
-      - scripts/install-audiowaveform.sh
-      - scripts/install-deps-postgis.sh
+      - .github/workflows/push-node-20.yml
+      - node-20.Dockerfile
   schedule:
-    - cron: 59 5 22 * * # every 22nd on 5.55 UTC
+    - cron: 45 5 22 * * # every 22nd on 5.55 UTC
   workflow_dispatch:
 
 jobs:
@@ -30,7 +27,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file: python-postgis-3.11.Dockerfile
+          file: node-20.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: uninen/python-postgis:3.11
+          tags: uninen/node:20
