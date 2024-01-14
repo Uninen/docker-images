@@ -8,8 +8,10 @@ on:
     paths:
       - .github/workflows/push-python-postgis-3.11.yml
       - python-postgis-3.11.Dockerfile
-      - scripts/install-audiowaveform.sh
-      - scripts/install-deps-postgis.sh
+      - scripts/cleanup.sh
+      - scripts/install-common.sh
+      - scripts/install-postgres-client.sh
+      - scripts/prep-postgis.sh
   schedule:
     - cron: 59 5 22 * * # every 22nd on 5.55 UTC
   workflow_dispatch:

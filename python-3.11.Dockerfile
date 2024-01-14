@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN useradd -m -s /bin/bash duser
 
-COPY scripts/install-deps.sh .
-RUN ./install-deps.sh
+ADD ./scripts /root/scripts/
+RUN /root/scripts/prep-python.sh && rm -rf /root/scripts
 
 CMD ["python"]

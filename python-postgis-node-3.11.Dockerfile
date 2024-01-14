@@ -9,8 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN useradd -m -s /bin/bash duser
 
-COPY scripts/install-audiowaveform.sh .
-COPY scripts/install-deps-postgis-node.sh .
-RUN ./install-deps-postgis-node.sh
+ADD ./scripts /root/scripts/
+RUN /root/scripts/prep-postgis-node.sh && rm -rf /root/scripts
 
 CMD ["python"]

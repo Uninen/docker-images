@@ -7,7 +7,7 @@ ENV PATH="/root/.local/bin:/usr/local/bin:${PATH}"
 ENV PYTHONPATH="/root/.local/lib:/code/:/code/pylib:${PYTONPATH}"
 ENV DEBIAN_FRONTEND=dialog
 
-COPY scripts/install-dev-deps.sh .
-RUN ./install-dev-deps.sh
+ADD ./scripts /root/scripts/
+RUN /root/scripts/prep-dev.sh && rm -rf /root/scripts
 
 CMD ["python"]

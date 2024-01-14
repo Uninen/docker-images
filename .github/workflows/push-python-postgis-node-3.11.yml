@@ -8,8 +8,11 @@ on:
     paths:
       - .github/workflows/push-python-postgis-node-3.11.yml
       - python-postgis-node-3.11.Dockerfile
+      - scripts/cleanup.sh
+      - scripts/install-common.sh
+      - scripts/install-postgres-client.sh
       - scripts/install-audiowaveform.sh
-      - scripts/install-deps-postgis-node.sh
+      - scripts/prep-postgis-node.sh
   schedule:
     - cron: 5 6 22 * * # every 22nd on 5.55 UTC
   workflow_dispatch:

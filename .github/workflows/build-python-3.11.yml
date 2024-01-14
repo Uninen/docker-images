@@ -5,7 +5,10 @@ on:
     paths:
       - .github/workflows/build-python-3.11.yml
       - python-3.11.Dockerfile
-      - scripts/install-deps.sh
+      - scripts/cleanup.sh
+      - scripts/install-common.sh
+      - scripts/install-postgres-client.sh
+      - scripts/prep-python.sh
 
 concurrency:
   group: build-${{ github.workflow }}-${{ github.head_ref || github.run_id }}

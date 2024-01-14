@@ -7,6 +7,9 @@ on:
     paths:
       - .github/workflows/push-node-20.yml
       - node-20.Dockerfile
+      - scripts/cleanup.sh
+      - scripts/install-common.sh
+      - scripts/prep-node.sh
   schedule:
     - cron: 45 5 22 * * # every 22nd on 5.55 UTC
   workflow_dispatch:

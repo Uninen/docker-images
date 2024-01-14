@@ -7,7 +7,10 @@ on:
     paths:
       - .github/workflows/push-python-3.11.yml
       - python-3.11.Dockerfile
-      - scripts/install-deps.sh
+      - scripts/cleanup.sh
+      - scripts/install-common.sh
+      - scripts/install-postgres-client.sh
+      - scripts/prep-python.sh
   schedule:
     - cron: 55 5 22 * * # every 22nd on 5.55 UTC
   workflow_dispatch:

@@ -1,6 +1,6 @@
 # Docker Images
 
-Purpose-built images for audio-related Python projects.
+Purpose-built images for (audio-related) Python projects.
 
 These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be light, yet complete and secure enough **for production**.
 
@@ -22,13 +22,13 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 ## Images
 
-| Name                   | Description                                                                            |
-| ---------------------- | -------------------------------------------------------------------------------------- |
-| `node`                 | Node 20, latest pnpm 8 installed via corepack.                                         |
-| `python`               | Python, build tools, PosgreSQL dependencies.                                           |
-| `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                 |
-| `python-postgis-node ` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.             |
-| `python-dev`           | Development image based on `python-postgis-node` with git + Playwright + dev packages. |
+| Name                   | Description                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| `node`                 | Node 20, latest pnpm 8 installed via corepack.                                   |
+| `python`               | Python, build tools, PosgreSQL dependencies.                                     |
+| `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                           |
+| `python-postgis-node ` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.       |
+| `python-dev`           | Development image based on `python-postgis-node` with Playwright + dev packages. |
 
 ## Using
 
@@ -44,44 +44,41 @@ See `py-test-app/` for example usage in a project.
 
 ## Building Manually
 
+If you don't yet have a builder ready, first run `docker buildx create --use` then;
+
 ### node (tags: 20)
 
 ```sh
-docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f node-20.Dockerfile -t uninen/node:20 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f node-20.Dockerfile -t uninen/node:20 --push .
 ```
 
 ### python-dev (tags: latest)
 
 ```sh
-docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest --push .
 ```
 
 ### python (tags: 3.10, 3.11)
 
 ```sh
-docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-3.11.Dockerfile -t uninen/python:3.11 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-3.11.Dockerfile -t uninen/python:3.11 --push .
 ```
 
 ### python-postgis (tags: 3.11)
 
 ```sh
-docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f python-postgis-3.11.Dockerfile -t uninen/python-postgis:3.11 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.11.Dockerfile -t uninen/python-postgis:3.11 --push .
 ```
 
 ### python-postgis-node (tags: 3.11)
 
 ```sh
-docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t uninen/python-postgis-node:3.11 --provenance false --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t uninen/python-postgis-node:3.11 --push .
 ```
 
 ## TODO
 
-- Add base images to separate audio-related packages (ffmpeg, audiowaveform)
+- Separate audio-related images
 
 ## License
 
