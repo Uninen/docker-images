@@ -1,8 +1,10 @@
 # Docker Images
 
+Purpose-built images for audio-related Python projects.
+
 These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be light, yet complete and secure enough **for production**.
 
-The images are regularly re-built to keep up with **security updates**. Combine with automatically polled image updates in your production (for example with [Traefik](https://traefik.io/) + [Watchtower](https://containrrr.dev/watchtower/)) and you get automatic security updates in production.
+The images are regularly re-built to keep up with security updates. Combine with automatically polled image updates in your production (for example with [Traefik](https://traefik.io/) + [Watchtower](https://containrrr.dev/watchtower/)) and you get automatic security updates in production.
 
 Contributions welcome!
 
@@ -11,36 +13,50 @@ Contributions welcome!
 - Slimmer than `python` base images but still include production deps
 - Built for **linux/amd64 and linux/arm64 platforms**
 - Latest `pip`, `pip-tools`, PostgreSQL 16 client and essential system packages preinstalled
-- Non-root `duser` user added (homet at `/home/duser/`)
+- Non-root `duser` user added (home at `/home/duser/`)
 - Python-related environment variables and paths set
 - Python built with PGO + Link-Time-Optimization flags
 - Based on Debian 12 (bookworm) base image
 
-See [sripts/](scripts/) for details of the actual preinstalled packages.
+See package lists at [sripts/](scripts/) for details of the actual preinstalled packages.
 
 ## Images
 
-| Name                      | Description                                                                |
-| ------------------------- | -------------------------------------------------------------------------- |
-| `node`                    | Node 20, latest pnpm 8 installed via corepack.                             |
-| `python`                  | Python, build tools, PosgreSQL dependencies.                               |
-| `python-postgis`          | Python, build tools, PosgreSQL + PostGIS dependencies.                     |
-| `python-postgis-node `    | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm. |
-| `python-postgis-node-dev` | Development image based on `python-postgis-node` with git + dev packages.  |
+| Name                   | Description                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| `node`                 | Node 20, latest pnpm 8 installed via corepack.                                         |
+| `python`               | Python, build tools, PosgreSQL dependencies.                                           |
+| `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                 |
+| `python-postgis-node ` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.             |
+| `python-dev`           | Development image based on `python-postgis-node` with git + Playwright + dev packages. |
 
 ## Using
 
 Use one of the following image sources:
 
 - `uninen/node:20`
+- `uninen/python-dev:latest`
 - `uninen/python:3.11`
 - `uninen/python-postgis:3.11`
 - `uninen/python-postgis-node:3.11`
-- `uninen/python-postgis-node-dev:latest`
 
 See `py-test-app/` for example usage in a project.
 
 ## Building Manually
+
+### node (tags: 20)
+
+```sh
+docker buildx create --use
+docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f node-20.Dockerfile -t uninen/node:20 --provenance false --push .
+```
+
+### python-dev (tags: latest)
+
+```sh
+docker buildx create --use
+docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest --provenance false --push .
+```
 
 ### python (tags: 3.10, 3.11)
 
@@ -61,20 +77,6 @@ docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f pytho
 ```sh
 docker buildx create --use
 docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t uninen/python-postgis-node:3.11 --provenance false --push .
-```
-
-### python-postgis-node-dev (tags: latest)
-
-```sh
-docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-dev.Dockerfile -t uninen/python-postgis-node-dev:latest --provenance false --push .
-```
-
-### node (tags: 20)
-
-```sh
-docker buildx create --use
-docker buildx build --platform linux/amd64,linux/arm64 --progress=plain -f node-20.Dockerfile -t uninen/node:20 --provenance false --push .
 ```
 
 ## TODO

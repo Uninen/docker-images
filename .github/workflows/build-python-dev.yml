@@ -1,5 +1,5 @@
-name: build-311-postgis-node-dev
-run-name: Build Python 3.11 + Postgis + Node DEV
+name: build-python-dev
+run-name: Build Python DEV
 
 on:
   workflow_run:
@@ -25,7 +25,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file: python-postgis-node-dev.Dockerfile
+          file: python-dev.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: uninen/python-postgis-node-dev:latest
+          tags: uninen/python-dev:latest
