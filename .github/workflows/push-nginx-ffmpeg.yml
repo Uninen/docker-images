@@ -1,18 +1,15 @@
-name: Build Node 20
+name: Push Nginx+Ffmpeg
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
-      - .github/workflows/build-node-20.yml
-      - .github/workflows/push-node-20.yml
-      - node-20.Dockerfile
-      - scripts/cleanup.sh
-      - scripts/install-common.sh
-      - scripts/prep-node.sh
-
-concurrency:
-  group: build-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
+      - .github/workflows/push-nginx-ffmpeg.yml
+      - nginx-ffmpeg.Dockerfile
+  schedule:
+    - cron: 45 8 24 * * # every 22nd on 8.24 UTC
+  workflow_dispatch:
 
 jobs:
   build_and_push:
@@ -30,7 +27,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          file: node-20.Dockerfile
+          file: nginx-ffmpeg.Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: false
-          tags: uninen/node:20
+          push: true
+          tags: uninen/nginx-ffmpeg:latest

@@ -22,23 +22,25 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 ## Images
 
-| Name                   | Description                                                                      |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| `node`                 | Node 20, latest pnpm 8 installed via corepack.                                   |
-| `python`               | Python, build tools, PosgreSQL dependencies.                                     |
-| `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                           |
-| `python-postgis-node ` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.       |
-| `python-dev`           | Development image based on `python-postgis-node` with Playwright + dev packages. |
+| Name                   | Description                                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| `python`               | Python, build tools, PosgreSQL dependencies.                                                |
+| `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                      |
+| `python-postgis-node ` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.                  |
+| `python-dev`           | Development image based on `python-postgis-node` with Playwright + dev packages.            |
+| `node`                 | Node 20, latest pnpm 8 installed via corepack.                                              |
+| `nginx-ffmpeg`         | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/) |
 
 ## Using
 
 Use one of the following image sources:
 
-- `uninen/node:20`
 - `uninen/python-dev:latest`
 - `uninen/python:3.11`
 - `uninen/python-postgis:3.11`
 - `uninen/python-postgis-node:3.11`
+- `uninen/node:20`
+- `uninen/nginx-ffmpeg:latest`
 
 See `py-test-app/` for example usage in a project.
 
@@ -46,34 +48,40 @@ See `py-test-app/` for example usage in a project.
 
 If you don't yet have a builder ready, first run `docker buildx create --use` then;
 
-### node (tags: 20)
-
-```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f node-20.Dockerfile -t uninen/node:20 --push .
-```
-
 ### python-dev (tags: latest)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest . --push
 ```
 
 ### python (tags: 3.10, 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-3.11.Dockerfile -t uninen/python:3.11 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-3.11.Dockerfile -t uninen/python:3.11 . --push
 ```
 
 ### python-postgis (tags: 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.11.Dockerfile -t uninen/python-postgis:3.11 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.11.Dockerfile -t uninen/python-postgis:3.11 . --push
 ```
 
 ### python-postgis-node (tags: 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t uninen/python-postgis-node:3.11 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node-3.11.Dockerfile -t uninen/python-postgis-node:3.11 . --push
+```
+
+### node (tags: 20)
+
+```sh
+docker buildx build --platform linux/amd64,linux/arm64 -f node-20.Dockerfile -t uninen/node:20 . --push
+```
+
+### nginx-ffmpeg (tags: latest)
+
+```sh
+docker buildx build --platform linux/amd64,linux/arm64 -f nginx-ffmpeg.Dockerfile -t uninen/node:20 . --push
 ```
 
 ## TODO
