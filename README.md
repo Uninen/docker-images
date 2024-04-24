@@ -2,7 +2,7 @@
 
 Purpose-built images for (audio-related) Python projects.
 
-These images are based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be light, yet complete and secure enough **for production**.
+These images aremostly based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be light, yet complete and secure enough **for production**.
 
 The images are regularly re-built to keep up with security updates. Combine with automatically polled image updates in your production (for example with [Traefik](https://traefik.io/) + [Watchtower](https://containrrr.dev/watchtower/)) and you get automatic security updates in production.
 
@@ -25,6 +25,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | Name                   | Description                                                                                 |
 | ---------------------- | ------------------------------------------------------------------------------------------- |
 | `python`               | Python, build tools, PosgreSQL dependencies.                                                |
+| `python-audio`         | Python, build tools, PosgreSQL, tools for audio manipulation.                               |
 | `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                      |
 | `python-postgis-node ` | Python, build tools, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.                  |
 | `python-dev`           | Development image based on `python-postgis-node` with Playwright + dev packages.            |
@@ -37,6 +38,7 @@ Use one of the following image sources:
 
 - `uninen/python-dev:latest`
 - `uninen/python:3.11`
+- `uninen/python-audio:3.12`
 - `uninen/python-postgis:3.11`
 - `uninen/python-postgis-node:3.11`
 - `uninen/node:20`
@@ -58,6 +60,12 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile 
 
 ```sh
 docker buildx build --platform linux/amd64,linux/arm64 -f python-3.11.Dockerfile -t uninen/python:3.11 . --push
+```
+
+### python (tags: 3.12)
+
+```sh
+docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.12 . --push
 ```
 
 ### python-postgis (tags: 3.11)
