@@ -28,7 +28,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | `python-audio`         | Python, build tools, uv, PosgreSQL, tools for audio manipulation.                           |
 | `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                      |
 | `python-postgis-node ` | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.              |
-| `python-dev`           | Development image based on `python-postgis-node` with Playwright + dev packages.            |
+| `python-dev`           | Development image based on `python-postgis-node` with Playwright, uv, Rye + dev packages.   |
 | `node`                 | Node 20, latest pnpm 8 installed via corepack.                                              |
 | `nginx-ffmpeg`         | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/) |
 
