@@ -11,9 +11,11 @@ apt -y install --no-install-recommends apt-utils build-essential libpq-dev binut
 /root/scripts/install-node.sh
 /root/scripts/install-audiowaveform.sh
 
-npm install --global pnpm
+corepack enable
+corepack prepare pnpm@latest-8 --activate
+
 pip install --upgrade pip --no-cache-dir
-pip install pip-tools playwright
+pip install playwright
 playwright install --with-deps firefox
 
 /root/scripts/cleanup.sh

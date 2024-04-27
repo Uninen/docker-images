@@ -3,7 +3,7 @@ run-name: Build Python DEV
 
 on:
   workflow_run:
-    workflows: [build-311-postgis-node]
+    workflows: [build-postgis-node]
     types: [completed]
   workflow_call:
   workflow_dispatch:

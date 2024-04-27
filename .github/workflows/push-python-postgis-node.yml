@@ -1,13 +1,13 @@
-name: push-311-postgis-node
-run-name: Push Python 3.11 + Postgis + Node
+name: push-postgis-node
+run-name: Push Python 3.12 + Postgis + Node
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/push-python-postgis-node-3.11.yml
-      - python-postgis-node-3.11.Dockerfile
+      - .github/workflows/push-python-postgis-node.yml
+      - python-postgis-node.Dockerfile
       - scripts/cleanup.sh
       - scripts/install-common.sh
       - scripts/install-postgres-client.sh
@@ -33,7 +33,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          file: python-postgis-node-3.11.Dockerfile
+          file: python-postgis-node.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: uninen/python-postgis-node:3.11
+          tags: uninen/python-postgis-node:3.12
