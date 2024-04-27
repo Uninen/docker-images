@@ -4,9 +4,12 @@ from starlette.routing import Route
 
 
 async def homepage(request):
-    return JSONResponse({'Hello': 'Docker!'})
+    return JSONResponse({"Hello": "Docker!"})
 
 
-app = Starlette(debug=True, routes=[
-    Route('/', homepage),
-])
+app = Starlette(
+    debug=True,
+    routes=[
+        Route("/", homepage),
+    ],
+)

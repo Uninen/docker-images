@@ -37,7 +37,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 Use one of the following image sources:
 
 - `uninen/python-dev:latest`
-- `uninen/python:3.11`
+- `uninen/python:3.12`
 - `uninen/python-audio:3.12`
 - `uninen/python-postgis:3.11`
 - `uninen/python-postgis-node:3.11`
@@ -56,13 +56,13 @@ If you don't yet have a builder ready, first run `docker buildx create --use` th
 docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest . --push
 ```
 
-### python (tags: 3.10, 3.11)
+### python (tags: 3.11, 3.12)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-3.11.Dockerfile -t uninen/python:3.11 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-3.12.Dockerfile -t uninen/python:3.12 . --push
 ```
 
-### python (tags: 3.12)
+### python-audio (tags: 3.12)
 
 ```sh
 docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.12 . --push

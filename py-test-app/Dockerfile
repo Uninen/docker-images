@@ -1,12 +1,17 @@
-FROM uninen/python:3.11
+FROM uninen/python:3.12
 
 ENV DOCKER_BUILDKIT=1
+ENV PATH="/home/duser/.local/bin:/home/duser/.cargo/bin:${PATH}"
+ENV PYTHONPATH="/home/duser/.local/lib:${PYTONPATH}"
+ENV VIRTUAL_ENV="/home/duser/.local"
 
 USER duser
-WORKDIR /home/duser
-ADD --chown=duser:duser . /home/duser
+WORKDIR /code
 
-RUN --mount=type=cache,target=/home/duser/.cache \
-    pip install --user -r requirements.txt
+COPY requirements.txt /code/requirements.txt
+RUN uv pip install --no-cache -r requirements.txt
+
+COPY . /code
 
 CMD ["uvicorn", "--host", "0.0.0.0", "hello:app"]
+# CMD /bin/sh -c "while sleep 1000; do :; done"

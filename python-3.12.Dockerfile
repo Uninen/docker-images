@@ -11,7 +11,6 @@ RUN useradd -m -s /bin/bash duser
 
 ADD ./scripts /root/scripts/
 RUN /root/scripts/prep-python.sh && \
-    /root/scripts/prep-audio.sh && \
     rm -rf /root/scripts
 
 USER duser
