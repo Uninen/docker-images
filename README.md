@@ -40,7 +40,7 @@ Maintained images and tags:
 - `uninen/python:3.12` (legacy tags: `3.11`)
 - `uninen/python-audio:3.12`
 - `uninen/python-postgis:3.11`
-- `uninen/python-postgis-node:3.11`
+- `uninen/python-postgis-node:3.12` (legacy tags: `3.11`)
 - `uninen/node:20`
 - `uninen/nginx-ffmpeg:latest`
 

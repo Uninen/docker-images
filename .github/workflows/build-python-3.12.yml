@@ -1,10 +1,10 @@
-name: Build Python 3.11
+name: Build Python 3.12
 
 on:
   pull_request:
     paths:
-      - .github/workflows/build-python-3.11.yml
-      - python-3.11.Dockerfile
+      - .github/workflows/build-python-3.12.yml
+      - python-3.12.Dockerfile
       - scripts/cleanup.sh
       - scripts/install-common.sh
       - scripts/install-postgres-client.sh
@@ -30,7 +30,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          file: python-3.11.Dockerfile
+          file: python-3.12.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: uninen/python:3.11
+          tags: uninen/python:3.12
