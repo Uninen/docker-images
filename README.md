@@ -2,7 +2,7 @@
 
 Purpose-built images for (audio-related) Python projects.
 
-These images aremostly based on [RevSys Python Builds](https://github.com/revsys/optimized-python-docker), adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be complete and secure enough **for production**.
+These images are mostly based on Python slim, adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be complete and secure enough **for production**.
 
 The images are regularly re-built to keep up with security updates. Combine with automatically polled image updates in your production (for example with [Traefik](https://traefik.io/) + [Watchtower](https://containrrr.dev/watchtower/)) and you get automatic security updates in production.
 
@@ -39,7 +39,7 @@ Maintained images and tags:
 - `uninen/python-dev:latest` (legacy tags: `3.11`)
 - `uninen/python:3.12` (legacy tags: `3.11`)
 - `uninen/python-audio:3.12`
-- `uninen/python-postgis:3.11`
+- `uninen/python-postgis:3.12` (legacy tags: `3.11`)
 - `uninen/python-postgis-node:3.12` (legacy tags: `3.11`)
 - `uninen/node:20`
 - `uninen/nginx-ffmpeg:latest`
@@ -68,10 +68,10 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-3.12.Dockerfile
 docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.12 . --push
 ```
 
-### python-postgis (tags: 3.11)
+### python-postgis (tags: 3.12, 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.11.Dockerfile -t uninen/python-postgis:3.11 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.12.Dockerfile -t uninen/python-postgis:3.12 . --push
 ```
 
 ### python-postgis-node (tags: 3.12, 3.11)

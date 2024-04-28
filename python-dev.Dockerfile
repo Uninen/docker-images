@@ -20,6 +20,7 @@ WORKDIR /home/duser
 RUN curl -sSf https://rye-up.com/get | bash && \
     mkdir -p /home/duser/.local/share/bash-completion/completions && \
     rye self completion > /home/duser/.local/share/bash-completion/completions/rye.bash && \
-    rye config --set-bool behavior.use-uv=true
+    rye config --set-bool behavior.use-uv=true && \
+    rye pin cpython@3.12.3
 
 CMD ["python"]

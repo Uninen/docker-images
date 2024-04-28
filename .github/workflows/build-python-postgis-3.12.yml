@@ -1,23 +1,21 @@
-name: push-311-postgis
-run-name: Push Python 3.11 + Postgis
+name: Build Python 3.12 + Postgis
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
     paths:
-      - .github/workflows/push-python-postgis-3.11.yml
-      - python-postgis-3.11.Dockerfile
+      - .github/workflows/build-python-postgis-3.12.yml
+      - python-postgis-3.12.Dockerfile
       - scripts/cleanup.sh
       - scripts/install-common.sh
       - scripts/install-postgres-client.sh
       - scripts/prep-postgis.sh
-  schedule:
-    - cron: 59 5 22 * * # every 22nd on 5.55 UTC
-  workflow_dispatch:
+
+concurrency:
+  group: build-postgis-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-  build_and_push:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -32,7 +30,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          file: python-postgis-3.11.Dockerfile
+          file: python-postgis-3.12.Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: true
-          tags: uninen/python-postgis:3.11
+          push: false
+          tags: uninen/python-postgis:3.12
