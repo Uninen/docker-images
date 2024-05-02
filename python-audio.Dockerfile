@@ -20,7 +20,5 @@ ADD --chmod=755 https://astral.sh/uv/install.sh /home/duser/install.sh
 RUN /home/duser/install.sh && \
     rm /home/duser/install.sh && \
     uv venv .local
-USER root
-WORKDIR /root
 
 CMD ["python"]
