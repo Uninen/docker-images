@@ -6,6 +6,7 @@ ENV DOCKER_BUILDKIT=1
 ENV PATH="/home/duser/.local/bin:/home/duser/.cargo/bin:${PATH}"
 ENV PYTHONPATH="/home/duser/.local/lib:${PYTHONPATH}"
 ENV DEBIAN_FRONTEND=noninteractive
+ENV VIRTUAL_ENV="/home/duser/.local"
 
 RUN useradd -m -s /bin/bash duser
 
