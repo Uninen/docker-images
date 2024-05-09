@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV DOCKER_BUILDKIT=1
 ENV PATH="/home/duser/.local/bin:/home/duser/.cargo/bin:${PATH}"
-ENV PYTHONPATH="/home/duser/.local/lib:${PYTONPATH}"
+ENV PYTHONPATH="/home/duser/.local/lib:${PYTHONPATH}"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN useradd -m -s /bin/bash duser

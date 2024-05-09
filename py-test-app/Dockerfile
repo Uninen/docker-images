@@ -2,7 +2,7 @@ FROM uninen/python:3.12
 
 ENV DOCKER_BUILDKIT=1
 ENV PATH="/home/duser/.local/bin:/home/duser/.cargo/bin:${PATH}"
-ENV PYTHONPATH="/home/duser/.local/lib:${PYTONPATH}"
+ENV PYTHONPATH="/home/duser/.local/lib:${PYTHONPATH}"
 ENV VIRTUAL_ENV="/home/duser/.local"
 
 USER duser
