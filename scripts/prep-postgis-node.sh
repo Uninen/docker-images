@@ -12,7 +12,7 @@ apt -y install --no-install-recommends apt-utils build-essential libpq-dev binut
 /root/scripts/install-audiowaveform.sh
 
 corepack enable
-corepack prepare pnpm@latest-8 --activate
+corepack prepare pnpm@latest-9 --activate
 
 pip install --upgrade pip --no-cache-dir
 pip install playwright
