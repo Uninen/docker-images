@@ -29,7 +29,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                      |
 | `python-postgis-node ` | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.              |
 | `python-dev`           | Development image based on `python-postgis-node` with Playwright, uv, Rye + dev packages.   |
-| `node`                 | Node 20, latest pnpm 9 installed via corepack.                                              |
+| `node`                 | Node 20 or 22, latest pnpm 9 installed via corepack.                                        |
 | `nginx-ffmpeg`         | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/) |
 
 ## Using
@@ -41,7 +41,7 @@ Maintained images and tags:
 - `uninen/python-audio:3.12`
 - `uninen/python-postgis:3.12` (legacy tags: `3.11`)
 - `uninen/python-postgis-node:3.12` (legacy tags: `3.11`)
-- `uninen/node:20`
+- `uninen/node:22`
 - `uninen/nginx-ffmpeg:latest`
 
 See `py-test-app/` for example usage in a project.
@@ -80,10 +80,10 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.12.Do
 docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node.Dockerfile -t uninen/python-postgis-node:3.12 . --push
 ```
 
-### node (tags: 20)
+### node (tags: 22, 20)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f node-20.Dockerfile -t uninen/node:20 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f node-22.Dockerfile -t uninen/node:22 . --push
 ```
 
 ### nginx-ffmpeg (tags: latest)
