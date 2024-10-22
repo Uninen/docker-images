@@ -15,7 +15,6 @@ Contributions welcome!
 - Latest `pip`, `uv` or `pip-tools`, PostgreSQL 16 client and essential system packages preinstalled
 - Non-root `duser` user added (home at `/home/duser/`)
 - Python-related environment variables and paths set
-- Python built with PGO + Link-Time-Optimization flags
 - Based on Debian 12 (bookworm) base image
 
 See package lists at [sripts/](scripts/) for details of the actual preinstalled packages.
