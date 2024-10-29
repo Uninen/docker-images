@@ -1,4 +1,4 @@
-FROM uninen/python:3.12
+FROM uninen/python:3.13
 
 ENV DOCKER_BUILDKIT=1
 ENV PATH="/home/duser/.local/bin:/home/duser/.cargo/bin:${PATH}"
@@ -9,7 +9,7 @@ USER duser
 WORKDIR /code
 
 COPY requirements.txt /code/requirements.txt
-RUN uv pip install --no-cache -r requirements.txt
+RUN uv pip install -r requirements.txt
 
 COPY . /code
 

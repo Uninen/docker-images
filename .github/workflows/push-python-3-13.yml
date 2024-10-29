@@ -1,21 +1,22 @@
-name: Build Python 3.12
+name: Push Python 3.13
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
-      - .github/workflows/build-python-3.12.yml
-      - python-3.12.Dockerfile
+      - .github/workflows/push-python-3.13.yml
+      - python-3.13.Dockerfile
       - scripts/cleanup.sh
       - scripts/install-common.sh
       - scripts/install-postgres-client.sh
       - scripts/prep-python.sh
-
-concurrency:
-  group: build-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
+  schedule:
+    - cron: 55 5 22 * * # every 22nd on 5.55 UTC
+  workflow_dispatch:
 
 jobs:
-  build:
+  build_and_push:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -30,7 +31,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          file: python-3.12.Dockerfile
+          file: python-3.13.Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: false
-          tags: uninen/python:3.12
+          push: true
+          tags: uninen/python:3.13
