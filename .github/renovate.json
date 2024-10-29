@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", "group:all", "schedule:weekly", ":widenPeerDependencies"],
+  "extends": ["config:recommended", "group:all", "schedule:weekly", ":widenPeerDependencies"],
   "enabledManagers": ["github-actions"],
   "timezone": "Europe/Helsinki",
   "dependencyDashboard": true
