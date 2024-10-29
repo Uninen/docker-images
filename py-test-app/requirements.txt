@@ -1,2 +1,3 @@
 starlette
 uvicorn
+zipp>=3.19.1

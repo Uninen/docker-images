@@ -1,5 +1,5 @@
 name: build-postgis-node
-run-name: Build Python 3.12 + Postgis + Node
+run-name: Build Python 3.13 + Postgis + Node
 
 on:
   pull_request:
@@ -35,4 +35,4 @@ jobs:
           file: python-postgis-node.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: uninen/python-postgis-node:3.12
+          tags: uninen/python-postgis-node:3.13

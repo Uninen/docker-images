@@ -27,20 +27,20 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | `python-audio`         | Python, build tools, uv, PosgreSQL, tools for audio manipulation.                           |
 | `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                      |
 | `python-postgis-node ` | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.              |
-| `python-dev`           | Development image based on `python-postgis-node` with Playwright, uv, Rye + dev packages.   |
-| `node`                 | Node 20 or 22, latest pnpm 9 installed via corepack.                                        |
+| `python-dev`           | Development image based on `python-postgis-node` with Playwright, uv + dev packages.        |
+| `node`                 | Node 22 or 20, latest pnpm 9 installed via corepack.                                        |
 | `nginx-ffmpeg`         | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/) |
 
 ## Using
 
 Maintained images and tags:
 
-- `uninen/python-dev:latest` (legacy tags: `3.11`)
-- `uninen/python:3.12` (legacy tags: `3.11`)
-- `uninen/python-audio:3.12`
-- `uninen/python-postgis:3.12` (legacy tags: `3.11`)
-- `uninen/python-postgis-node:3.12` (legacy tags: `3.11`)
-- `uninen/node:22`
+- `uninen/python-dev:latest` (legacy tags: `3.12`, `3.11`)
+- `uninen/python:3.13` (legacy tags: `3.12`, `3.11`)
+- `uninen/python-audio:3.13` (legacy tags: `3.12`)
+- `uninen/python-postgis:3.13` (legacy tags: `3.12`, `3.11`)
+- `uninen/python-postgis-node:3.13` (legacy tags: `3.12`, `3.11`)
+- `uninen/node:22` (legacy tags: `20`)
 - `uninen/nginx-ffmpeg:latest`
 
 See `py-test-app/` for example usage in a project.
@@ -49,34 +49,34 @@ See `py-test-app/` for example usage in a project.
 
 If you don't yet have a builder ready, first run `docker buildx create --use` then;
 
-### python-dev (tags: latest, 3.11)
+### python-dev (tags: latest, 3.12, 3.11)
 
 ```sh
 docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest . --push
 ```
 
-### python (tags: 3.12, 3.11)
+### python (tags: 3.13, 3.12, 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-3.12.Dockerfile -t uninen/python:3.12 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-3.13.Dockerfile -t uninen/python:3.13 . --push
 ```
 
-### python-audio (tags: 3.12)
+### python-audio (tags: 3.13, 3.12)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.12 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.13 . --push
 ```
 
-### python-postgis (tags: 3.12, 3.11)
+### python-postgis (tags: 3.13, 3.12, 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.12.Dockerfile -t uninen/python-postgis:3.12 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.13.Dockerfile -t uninen/python-postgis:3.13 . --push
 ```
 
-### python-postgis-node (tags: 3.12, 3.11)
+### python-postgis-node (tags: 3.13, 3.12, 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node.Dockerfile -t uninen/python-postgis-node:3.12 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node.Dockerfile -t uninen/python-postgis-node:3.13 . --push
 ```
 
 ### node (tags: 22, 20)
@@ -88,12 +88,20 @@ docker buildx build --platform linux/amd64,linux/arm64 -f node-22.Dockerfile -t 
 ### nginx-ffmpeg (tags: latest)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f nginx-ffmpeg.Dockerfile -t uninen/node:20 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f nginx-ffmpeg.Dockerfile -t uninen/nginx-ffmpeg:latest . --push
 ```
 
-## TODO
+## Testing
 
-- Separate audio-related images
+```sh
+cd py-test-app
+docker compose build
+docker compose up
+```
+
+## Common Issues
+
+- In case of GPG signature errors from apt, try `docker builder prune` on macOS
 
 ## License
 

@@ -1,4 +1,4 @@
-ARG NGINX_VERSION=1.25.3
+ARG NGINX_VERSION=1.27.2
 ARG HTTP_FLV_MODULE_VERSION=1.2.11
 ARG HTTP_PORT=8099
 ARG HTTPS_PORT=4435
@@ -61,24 +61,24 @@ ENV HTTP_PORT=${HTTP_PORT} \
     RTMP_PORT=${RTMP_PORT}
 
 RUN cd /tmp && \
-  wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
-  && tar -zxvf nginx-${NGINX_VERSION}.tar.gz \
-  && wget https://github.com/winshining/nginx-http-flv-module/archive/refs/tags/v${HTTP_FLV_MODULE_VERSION}.tar.gz \
-  && tar -zxvf v${HTTP_FLV_MODULE_VERSION}.tar.gz
+    wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
+    && tar -zxvf nginx-${NGINX_VERSION}.tar.gz \
+    && wget https://github.com/winshining/nginx-http-flv-module/archive/refs/tags/v${HTTP_FLV_MODULE_VERSION}.tar.gz \
+    && tar -zxvf v${HTTP_FLV_MODULE_VERSION}.tar.gz
 
 RUN cd /tmp/nginx-${NGINX_VERSION} && \
-  ./configure \
-  --prefix=/usr/local/nginx \
-  --add-module=/tmp/nginx-http-flv-module-${HTTP_FLV_MODULE_VERSION} \
-  --conf-path=/etc/nginx/nginx.conf \
-  --with-threads \
-  --with-file-aio \
-  --with-http_ssl_module \
-  --with-debug \
-  --with-http_stub_status_module \
-  --with-cc-opt="-Wimplicit-fallthrough=0" && \
-  make && \
-  make install
+    ./configure \
+    --prefix=/usr/local/nginx \
+    --add-module=/tmp/nginx-http-flv-module-${HTTP_FLV_MODULE_VERSION} \
+    --conf-path=/etc/nginx/nginx.conf \
+    --with-threads \
+    --with-file-aio \
+    --with-http_ssl_module \
+    --with-debug \
+    --with-http_stub_status_module \
+    --with-cc-opt="-Wimplicit-fallthrough=0" && \
+    make && \
+    make install
 
 #######################################
 # Final
