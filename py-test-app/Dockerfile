@@ -9,7 +9,7 @@ USER duser
 WORKDIR /code
 
 COPY requirements.txt /code/requirements.txt
-RUN uv pip install -r requirements.txt
+RUN uv venv && uv pip install -r requirements.txt
 
 COPY . /code
 

@@ -1,9 +1,7 @@
-version: '3'
-
 services:
   py-test-app:
     build:
       context: .
-      dockerfile: './Dockerfile'
+      dockerfile: './Dockerfile.uv'
     ports:
       - 8000:8000

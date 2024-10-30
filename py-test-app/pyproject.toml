@@ -1,0 +1,11 @@
+[project]
+name = "py-test-app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "starlette>=0.41.2",
+    "uvicorn>=0.32.0",
+    "zipp>=3.20.2",
+]
