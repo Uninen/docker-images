@@ -82,6 +82,9 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node.Do
 ### node (tags: 22, 20)
 
 ```sh
+# test
+docker build -f node-22.Dockerfile -t uninen/node:22 .
+# prod
 docker buildx build --platform linux/amd64,linux/arm64 -f node-22.Dockerfile -t uninen/node:22 . --push
 ```
 
