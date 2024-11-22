@@ -21,15 +21,16 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 ## Images
 
-| Name                   | Description                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------- |
-| `python`               | Python, build tools, uv, PosgreSQL dependencies.                                            |
-| `python-audio`         | Python, build tools, uv, PosgreSQL, tools for audio manipulation.                           |
-| `python-postgis`       | Python, build tools, PosgreSQL + PostGIS dependencies.                                      |
-| `python-postgis-node ` | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.              |
-| `python-dev`           | Development image based on `python-postgis-node` with Playwright, uv + dev packages.        |
-| `node`                 | Node 22, pnpm 9 and latest Playwright.                                                      |
-| `nginx-ffmpeg`         | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/) |
+| Name                    | Description                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------- |
+| `python`                | Python, build tools, uv, PosgreSQL dependencies.                                            |
+| `python-audio`          | Python, build tools, uv, PosgreSQL, tools for audio manipulation.                           |
+| `python-postgis`        | Python, build tools, PosgreSQL + PostGIS dependencies.                                      |
+| `python-postgis-mysql ` | Python, build tools, uv, PosgreSQL + PostGIS + MySQL dependencies.                          |
+| `python-postgis-node `  | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.              |
+| `python-dev`            | Development image based on `python-postgis-node` with Playwright, uv + dev packages.        |
+| `node`                  | Node 22 and pnpm 9.                                                                         |
+| `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/) |
 
 ## Using
 
@@ -71,6 +72,12 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfil
 
 ```sh
 docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.13.Dockerfile -t uninen/python-postgis:3.13 . --push
+```
+
+### python-postgis-mysql (tags: 3.13)
+
+```sh
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-mysql.Dockerfile -t uninen/python-mysql-node:3.13 . --push
 ```
 
 ### python-postgis-node (tags: 3.13, 3.12, 3.11)
