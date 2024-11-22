@@ -11,7 +11,7 @@ on:
       - scripts/install-common.sh
       - scripts/prep-node.sh
   schedule:
-    - cron: 35 5 22 * * # every 22nd on 5.55 UTC
+    - cron: 35 5 22 * * # every 22nd on 5.35 UTC
   workflow_dispatch:
 
 jobs:

@@ -6,8 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN useradd -m -s /bin/bash duser
 
 RUN corepack enable && \
-    corepack prepare pnpm@latest-9 --activate && \
-    npx playwright install --with-deps
+    corepack prepare pnpm@latest-9 --activate
 
 ADD ./scripts /root/scripts/
 RUN /root/scripts/prep-node.sh && rm -rf /root/scripts

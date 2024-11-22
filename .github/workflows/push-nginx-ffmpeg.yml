@@ -8,7 +8,7 @@ on:
       - .github/workflows/push-nginx-ffmpeg.yml
       - nginx-ffmpeg.Dockerfile
   schedule:
-    - cron: 45 8 24 * * # every 22nd on 8.24 UTC
+    - cron: 45 8 24 * * # every 24nd on 8.45 UTC
   workflow_dispatch:
 
 jobs:
