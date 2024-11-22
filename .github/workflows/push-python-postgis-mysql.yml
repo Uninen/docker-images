@@ -4,7 +4,7 @@ run-name: Build Python 3.13 + Postgis + MySQL
 on:
   pull_request:
     paths:
-      - .github/workflows/build-python-postgis-mysql.yml
+      - .github/workflows/push-python-postgis-mysql.yml
       - python-postgis-mysql.Dockerfile
       - scripts/cleanup.sh
       - scripts/install-common.sh
