@@ -10,6 +10,7 @@ ENV PYTHONPATH="/home/duser/.local/lib:/home/duser/code/.dockervenv/lib/python3.
 ENV DEBIAN_FRONTEND=noninteractive
 ENV UV_NO_CACHE=1
 ENV UV_FROZEN=1
+ENV UV_LOCKED=1
 
 RUN useradd -m -s /bin/bash duser
 
