@@ -9,6 +9,7 @@ ENV PATH="/home/duser/.local/bin:/usr/local/cargo/bin:${PATH}"
 ENV PYTHONPATH="/home/duser/.local/lib:${PYTHONPATH}"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV UV_NO_CACHE=1
+ENV UV_LOCKED=1
 
 RUN useradd -m -s /bin/bash duser
 
