@@ -1,4 +1,4 @@
-FROM python:3.13.0-slim
+FROM python:3.13.1-slim
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -8,8 +8,6 @@ ENV CARGO_HOME=/usr/local/cargo
 ENV PATH="/home/duser/.local/bin:/usr/local/cargo/bin:${PATH}"
 ENV PYTHONPATH="/home/duser/.local/lib:/home/duser/code/.dockervenv/lib/python3.13/site-packages"
 ENV DEBIAN_FRONTEND=noninteractive
-ENV UV_NO_CACHE=1
-ENV UV_LOCKED=1
 
 RUN useradd -m -s /bin/bash duser
 
