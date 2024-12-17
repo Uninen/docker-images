@@ -1,6 +1,7 @@
 {
-  "extends": ["config:recommended", "group:all", "schedule:weekly"],
-  "enabledManagers": ["github-actions"],
+  "extends": ["config:recommended"],
+  "enabledManagers": ["github-actions", "dockerfile"],
+  "automerge": false,
   "timezone": "Europe/Helsinki",
   "dependencyDashboard": true
 }
