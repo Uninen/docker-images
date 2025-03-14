@@ -6,7 +6,7 @@ ARG RTMP_PORT=1935
 
 ###################################################
 # Base image
-FROM debian:bookworm as base-image
+FROM debian:bookworm AS base-image
 
 ARG HTTP_PORT
 ARG HTTPS_PORT
@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y ca-certificates wget gnupg libpcre3 && 
 
 ###################################################
 # Build image
-FROM debian:bookworm as build-image
+FROM debian:bookworm AS build-image
 
 ARG HTTP_PORT
 ARG HTTPS_PORT
@@ -48,7 +48,7 @@ RUN apt-get update && \
 
 ###################################################
 # Build
-FROM build-image as build-stage
+FROM build-image AS build-stage
 
 ARG NGINX_VERSION
 ARG HTTP_FLV_MODULE_VERSION
