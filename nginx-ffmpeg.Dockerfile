@@ -5,7 +5,7 @@ ARG HTTPS_PORT=4435
 ARG RTMP_PORT=1935
 
 ###################################################
-# Base image
+# Base image (Runtime dependencies)
 FROM debian:bookworm AS base-image
 
 ARG HTTP_PORT
@@ -17,52 +17,42 @@ ENV HTTP_PORT=${HTTP_PORT} \
     RTMP_PORT=${RTMP_PORT} \
     DEBIAN_FRONTEND=noninteractive
 
-# FFmpeg details: https://www.deb-multimedia.org/dists/stable/main/binary-amd64/package/ffmpeg
-RUN apt-get update && apt-get install -y ca-certificates wget gnupg libpcre3 && \
-    echo deb http://www.deb-multimedia.org bookworm main non-free | tee /etc/apt/sources.list.d/deb-multimedia.list && \
-    wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb && \
-    dpkg -i deb-multimedia-keyring_2024.9.1_all.deb && \
-    apt-get update && \
-    apt-get install -y ffmpeg && \
-    rm deb-multimedia-keyring_2024.9.1_all.deb && \
-    apt-get remove ca-certificates wget gnupg --allow-remove-essential --purge -y -q && \
-    apt-get autoremove -y && \
-    apt-get clean -y && \
-    rm -rf /var/cache/apt/* && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /root/.cache
-
-###################################################
-# Build image
-FROM debian:bookworm AS build-image
-
-ARG HTTP_PORT
-ARG HTTPS_PORT
-ARG RTMP_PORT
-
-ENV HTTP_PORT=${HTTP_PORT} \
-    HTTPS_PORT=${HTTPS_PORT} \
-    RTMP_PORT=${RTMP_PORT}
-
+# Install runtime dependencies (libpcre3 for nginx) and tools needed for FFmpeg install
+# Then install FFmpeg from deb-multimedia and cleanup build-only tools in one layer
 RUN apt-get update && \
-    apt-get install wget g++ make openssl libssl-dev zlib1g-dev libpcre3 libpcre3-dev -y
+    apt-get install -y --no-install-recommends wget gnupg ca-certificates libpcre3 && \
+    echo "deb http://www.deb-multimedia.org bookworm main non-free" > /etc/apt/sources.list.d/deb-multimedia.list && \
+    wget --no-verbose https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb -O /tmp/deb-multimedia-keyring.deb && \
+    dpkg -i /tmp/deb-multimedia-keyring.deb && \
+    rm /tmp/deb-multimedia-keyring.deb && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends ffmpeg && \
+    apt-get purge -y --auto-remove wget gnupg && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /root/.cache
 
 ###################################################
-# Build
-FROM build-image AS build-stage
+# Build dependencies image
+FROM debian:bookworm AS build-deps
+
+# Install only the packages needed to build Nginx
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends wget ca-certificates g++ make openssl libssl-dev zlib1g-dev libpcre3-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+###################################################
+# Build Nginx stage
+FROM build-deps AS build-stage
 
 ARG NGINX_VERSION
 ARG HTTP_FLV_MODULE_VERSION
-ARG HTTP_PORT
-ARG HTTPS_PORT
-ARG RTMP_PORT
-ARG TARGETARCH # Declare the automatic build argument
 
-ENV HTTP_PORT=${HTTP_PORT} \
-    HTTPS_PORT=${HTTPS_PORT} \
-    RTMP_PORT=${RTMP_PORT} \
-    MAKEFLAGS="-j$(nproc)"
-# CFLAGS/LDFLAGS will be set conditionally in the RUN command
+# Hardcode optimizations for Intel Skylake (Xeon E3-1275v5 target)
+ENV MAKEFLAGS="-j$(nproc)" \
+    CFLAGS="-O3 -march=skylake -mtune=skylake -flto -fomit-frame-pointer -pipe" \
+    CXXFLAGS="-O3 -march=skylake -mtune=skylake -flto -fomit-frame-pointer -pipe" \
+    LDFLAGS="-Wl,-O1"
 
 # Download Nginx and the module
 RUN cd /tmp && \
@@ -71,32 +61,12 @@ RUN cd /tmp && \
     && wget --no-verbose https://github.com/winshining/nginx-http-flv-module/archive/refs/tags/v${HTTP_FLV_MODULE_VERSION}.tar.gz \
     && tar -zxvf v${HTTP_FLV_MODULE_VERSION}.tar.gz
 
-# Configure, compile, and install Nginx with conditional flags
+# Configure, compile, install Nginx, and cleanup source files
 RUN set -eux; \
     cd /tmp/nginx-${NGINX_VERSION}; \
-    \
-    # Define base flags applicable to all architectures
-    NGINX_CFLAGS="-O3 -flto -fomit-frame-pointer -pipe"; \
-    NGINX_LDFLAGS="-Wl,-O1"; \
-    \
-    # Add architecture-specific optimizations
-    echo "Building for TARGETARCH=${TARGETARCH}"; \
-    if [ "${TARGETARCH}" = "amd64" ]; then \
-    echo "Applying Skylake optimizations for amd64"; \
-    NGINX_CFLAGS="${NGINX_CFLAGS} -march=skylake -mtune=skylake"; \
-    elif [ "${TARGETARCH}" = "arm64" ]; then \
-    echo "Applying generic ARMv8 optimizations for arm64"; \
-    # You can add generic ARM optimizations if desired, e.g.:
-    # NGINX_CFLAGS="${NGINX_CFLAGS} -march=armv8-a+crc -mtune=generic"; \
-    # For now, we'll stick to the base flags for simplicity on ARM
-    else \
-    echo "Using generic optimizations for ${TARGETARCH}"; \
-    fi; \
-    \
-    echo "Final CFLAGS: ${NGINX_CFLAGS}"; \
-    echo "Final LDFLAGS: ${NGINX_LDFLAGS}"; \
-    \
-    # Run configure with the determined flags
+    echo "Using hardcoded Skylake optimizations."; \
+    echo "CFLAGS: ${CFLAGS}"; \
+    echo "LDFLAGS: ${LDFLAGS}"; \
     ./configure \
     --prefix=/usr/local/nginx \
     --add-module=/tmp/nginx-http-flv-module-${HTTP_FLV_MODULE_VERSION} \
@@ -108,18 +78,16 @@ RUN set -eux; \
     --with-pcre-jit \
     --with-http_stub_status_module \
     # --with-debug \
-    --with-cc-opt="${NGINX_CFLAGS}" \
-    --with-ld-opt="${NGINX_LDFLAGS}"; \
-    \
-    # Build and install
+    --with-cc-opt="${CFLAGS}" \
+    --with-ld-opt="${LDFLAGS}"; \
     make; \
     make install; \
-    \
-    # Strip the binary
-    strip /usr/local/nginx/sbin/nginx;
+    strip /usr/local/nginx/sbin/nginx; \
+    # Clean up source code and downloaded archives
+    rm -rf /tmp/nginx-${NGINX_VERSION} /tmp/nginx-http-flv-module-${HTTP_FLV_MODULE_VERSION} /tmp/*.tar.gz
 
 #######################################
-# Final
+# Final image
 FROM base-image
 
 ARG HTTP_PORT

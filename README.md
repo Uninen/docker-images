@@ -100,9 +100,9 @@ docker buildx build --platform linux/amd64,linux/arm64 -f node-22.Dockerfile -t 
 
 ```sh
 # test
-docker buildx build -f nginx-ffmpeg.Dockerfile -t uninen/nginx-ffmpeg:latest .
+docker buildx build --platform linux/amd64 -f nginx-ffmpeg.Dockerfile -t uninen/nginx-ffmpeg:latest .
 # prod
-docker buildx build --platform linux/amd64,linux/arm64 -f nginx-ffmpeg.Dockerfile -t uninen/nginx-ffmpeg:latest . --push
+docker buildx build --platform linux/amd64 -f nginx-ffmpeg.Dockerfile -t uninen/nginx-ffmpeg:latest . --push
 ```
 
 ## Testing

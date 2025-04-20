@@ -5,3 +5,4 @@
 .tags
 local_notes.md
 .venv
+*.Dockerfile.txt
