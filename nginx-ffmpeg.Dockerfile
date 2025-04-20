@@ -1,3 +1,4 @@
+# Version: 2025.04.0
 ARG NGINX_VERSION=1.27.5
 ARG HTTP_FLV_MODULE_VERSION=1.2.12
 ARG HTTP_PORT=8099
@@ -22,13 +23,23 @@ ENV HTTP_PORT=${HTTP_PORT} \
 # https://ffmpeg.org/index.html#news
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget gnupg ca-certificates libpcre3 && \
+    echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb http://www.deb-multimedia.org bookworm main non-free" > /etc/apt/sources.list.d/deb-multimedia.list && \
     echo "deb http://www.deb-multimedia.org bookworm-backports main" >> /etc/apt/sources.list.d/deb-multimedia.list && \
     wget --no-verbose https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb -O /tmp/deb-multimedia-keyring.deb && \
     dpkg -i /tmp/deb-multimedia-keyring.deb && \
     rm /tmp/deb-multimedia-keyring.deb && \
     apt-get update && \
-    apt-get install -y --no-install-recommends -t bookworm-backports ffmpeg && \
+    apt-get install -y --no-install-recommends -t bookworm-backports \
+    ffmpeg \
+    intel-media-va-driver-non-free \
+    libva-drm2 \
+    libva-x11-2 \
+    libmfx1 \
+    i965-va-driver \
+    vainfo && \
     apt-get purge -y --auto-remove wget gnupg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /root/.cache
