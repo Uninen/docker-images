@@ -17,16 +17,18 @@ ENV HTTP_PORT=${HTTP_PORT} \
     RTMP_PORT=${RTMP_PORT} \
     DEBIAN_FRONTEND=noninteractive
 
-# Install runtime dependencies (libpcre3 for nginx) and tools needed for FFmpeg install
-# Then install FFmpeg from deb-multimedia and cleanup build-only tools in one layer
+# FFmpeg 6.1.2
+# https://www.deb-multimedia.org/dists/stable-backports/main/binary-amd64/package/ffmpeg
+# https://ffmpeg.org/index.html#news
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget gnupg ca-certificates libpcre3 && \
     echo "deb http://www.deb-multimedia.org bookworm main non-free" > /etc/apt/sources.list.d/deb-multimedia.list && \
+    echo "deb http://www.deb-multimedia.org bookworm-backports main" >> /etc/apt/sources.list.d/deb-multimedia.list && \
     wget --no-verbose https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb -O /tmp/deb-multimedia-keyring.deb && \
     dpkg -i /tmp/deb-multimedia-keyring.deb && \
     rm /tmp/deb-multimedia-keyring.deb && \
     apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg && \
+    apt-get install -y --no-install-recommends -t bookworm-backports ffmpeg && \
     apt-get purge -y --auto-remove wget gnupg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /root/.cache
@@ -35,7 +37,6 @@ RUN apt-get update && \
 # Build dependencies image
 FROM debian:bookworm AS build-deps
 
-# Install only the packages needed to build Nginx
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget ca-certificates g++ make openssl libssl-dev zlib1g-dev libpcre3-dev && \
     apt-get clean && \
@@ -54,14 +55,12 @@ ENV MAKEFLAGS="-j$(nproc)" \
     CXXFLAGS="-O3 -march=skylake -mtune=skylake -flto -fomit-frame-pointer -pipe" \
     LDFLAGS="-Wl,-O1"
 
-# Download Nginx and the module
 RUN cd /tmp && \
     wget --no-verbose https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
     && tar -zxvf nginx-${NGINX_VERSION}.tar.gz \
     && wget --no-verbose https://github.com/winshining/nginx-http-flv-module/archive/refs/tags/v${HTTP_FLV_MODULE_VERSION}.tar.gz \
     && tar -zxvf v${HTTP_FLV_MODULE_VERSION}.tar.gz
 
-# Configure, compile, install Nginx, and cleanup source files
 RUN set -eux; \
     cd /tmp/nginx-${NGINX_VERSION}; \
     echo "Using hardcoded Skylake optimizations."; \
@@ -83,7 +82,6 @@ RUN set -eux; \
     make; \
     make install; \
     strip /usr/local/nginx/sbin/nginx; \
-    # Clean up source code and downloaded archives
     rm -rf /tmp/nginx-${NGINX_VERSION} /tmp/nginx-http-flv-module-${HTTP_FLV_MODULE_VERSION} /tmp/*.tar.gz
 
 #######################################
