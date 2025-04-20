@@ -7,7 +7,7 @@ ARG RTMP_PORT=1935
 
 ###################################################
 # Base image (Runtime dependencies)
-FROM debian:bookworm AS base-image
+FROM debian:bookworm-slim AS base-image
 
 ARG HTTP_PORT
 ARG HTTPS_PORT
@@ -46,7 +46,7 @@ RUN apt-get update && \
 
 ###################################################
 # Build dependencies image
-FROM debian:bookworm AS build-deps
+FROM debian:bookworm-slim AS build-deps
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget ca-certificates g++ make openssl libssl-dev zlib1g-dev libpcre3-dev && \
