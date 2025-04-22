@@ -1,4 +1,4 @@
-# Version: 2025.04.0
+# Version: 2025.04.1
 ARG NGINX_VERSION=1.27.5
 ARG HTTP_FLV_MODULE_VERSION=1.2.12
 ARG HTTP_PORT=8099
@@ -7,16 +7,12 @@ ARG RTMP_PORT=1935
 
 ###################################################
 # Base image (Runtime dependencies)
-FROM debian:bookworm-slim AS base-image
+FROM python:3.13-slim-bookworm AS base-image
 
-ARG HTTP_PORT
-ARG HTTPS_PORT
-ARG RTMP_PORT
-
-ENV HTTP_PORT=${HTTP_PORT} \
-    HTTPS_PORT=${HTTPS_PORT} \
-    RTMP_PORT=${RTMP_PORT} \
-    DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1
 
 # FFmpeg 6.1.2
 # https://www.deb-multimedia.org/dists/stable-backports/main/binary-amd64/package/ffmpeg
@@ -36,13 +32,15 @@ RUN apt-get update && \
     ffmpeg \
     intel-media-va-driver-non-free \
     libva-drm2 \
-    libva-x11-2 \
-    libmfx1 \
-    i965-va-driver \
-    vainfo && \
+    libmfx1 && \
     apt-get purge -y --auto-remove wget gnupg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /root/.cache
+
+###################################################
+# Install UV
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+RUN uv --version
 
 ###################################################
 # Build dependencies image
@@ -106,7 +104,7 @@ ARG RTMP_PORT
 ENV HTTP_PORT=${HTTP_PORT} \
     HTTPS_PORT=${HTTPS_PORT} \
     RTMP_PORT=${RTMP_PORT} \
-    PATH="${PATH}:/usr/local/nginx/sbin"
+    PATH="/usr/local/nginx/sbin:${PATH}"
 
 COPY --from=build-stage /usr/local/nginx /usr/local/nginx
 COPY --from=build-stage /etc/nginx /etc/nginx
