@@ -85,7 +85,7 @@ RUN set -eux; \
     --with-http_v2_module \
     --with-pcre-jit \
     --with-http_stub_status_module \
-    # --with-debug \
+    --with-debug \
     --with-cc-opt="${CFLAGS}" \
     --with-ld-opt="${LDFLAGS}"; \
     make; \
