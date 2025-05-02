@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # https://www.deb-multimedia.org/dists/stable-backports/main/binary-amd64/package/ffmpeg
 # https://ffmpeg.org/index.html#news
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget gnupg ca-certificates libpcre3 && \
+    apt-get install -y --no-install-recommends wget gnupg ca-certificates libpcre3 moreutils && \
     echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
@@ -85,7 +85,7 @@ RUN set -eux; \
     --with-http_v2_module \
     --with-pcre-jit \
     --with-http_stub_status_module \
-    --with-debug \
+    # --with-debug \
     --with-cc-opt="${CFLAGS}" \
     --with-ld-opt="${LDFLAGS}"; \
     make; \
