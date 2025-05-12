@@ -12,7 +12,7 @@ Contributions welcome!
 
 - Slimmer than `python` base images but still include production deps
 - Built for **linux/amd64 and linux/arm64 platforms**
-- Latest `pip`, `uv` or `pip-tools`, PostgreSQL 16 client and essential system packages preinstalled
+- Latest `pip`, `uv` or `pip-tools`, PostgreSQL 17 client and essential system packages preinstalled
 - Non-root `duser` user added (home at `/home/duser/`)
 - Python-related environment variables and paths set
 - Based on Debian 12 (bookworm) base image
