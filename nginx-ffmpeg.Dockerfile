@@ -1,13 +1,15 @@
 # Version: 2025.04.1
-ARG NGINX_VERSION=1.27.5
+ARG NGINX_VERSION=1.28.0
+# https://nginx.org/en/download.html
 ARG HTTP_FLV_MODULE_VERSION=1.2.12
+# https://github.com/winshining/nginx-http-flv-module/releases
 ARG HTTP_PORT=8099
 ARG HTTPS_PORT=4435
 ARG RTMP_PORT=1935
 
 ###################################################
 # Base image (Runtime dependencies)
-FROM python:3.13-slim-bookworm AS base-image
+FROM python:3.13.5-slim-bookworm AS base-image
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
