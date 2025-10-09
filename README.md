@@ -24,10 +24,9 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | Name                    | Description                                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `python`                | Python, build tools, uv, PostgreSQL 17 dependencies.                                                         |
-| `python-audio`          | Python, build tools, uv, PostgreSQL 17, tools for audio manipulation.                                        |
-| `python-postgis`        | Python, build tools, PostgreSQL + PostGIS dependencies.                                                      |
-| `python-postgis-mysql ` | Python, build tools, uv, ffmpeg, PostgreSQL + PostGIS + MySQL dependencies.                                  |
-| `python-postgis-node `  | Python, build tools, uv, PostgreSQL + PostGIS dependencies, and Node 24 + pnpm.                              |
+| `python-audio`          | Python image packages + tools for audio manipulation.                                                        |
+| `python-postgis`        | Python image packages + PostGIS dependencies.                                                                |
+| `python-postgis-mysql ` | Python image packages + PostGIS + MySQL dependencies.                                                        |
 | `python-dev`            | Development image based on `python-postgis-node` with Playwright, uv + dev packages.                         |
 | `node`                  | Node 24 and pnpm 10.                                                                                         |
 | `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.13, uv |
@@ -39,9 +38,8 @@ Maintained images and tags:
 - `uninen/python-dev:latest` (legacy tags: `3.12`, `3.11`)
 - `uninen/python:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
 - `uninen/python-audio:3.14` (legacy tags: `3.13`, `3.12`)
-- `uninen/python-postgis:3.13` (legacy tags: `3.12`, `3.11`)
-- `uninen/python-postgis-mysql:3.13`
-- `uninen/python-postgis-node:3.13` (legacy tags: `3.12`, `3.11`)
+- `uninen/python-postgis:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
+- `uninen/python-postgis-mysql:3.14`
 - `uninen/node:24` (legacy tags: `22`, `20`)
 - `uninen/nginx-ffmpeg:latest`
 
@@ -87,16 +85,14 @@ docker build -f python-postgis-3.14.Dockerfile -t uninen/python-postgis:3.14 .
 docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.14.Dockerfile -t uninen/python-postgis:3.14 . --push
 ```
 
-### python-postgis-mysql (tags: 3.13)
+### python-postgis-mysql (tags: 3.14, 3.13)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-mysql.Dockerfile -t uninen/python-mysql-node:3.13 . --push
-```
+# test
+docker build -f python-postgis-mysql.Dockerfile -t uninen/python-postgis-mysql:3.14 .
 
-### python-postgis-node (tags: 3.13, 3.12, 3.11)
-
-```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node.Dockerfile -t uninen/python-postgis-node:3.13 . --push
+# prod
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-mysql.Dockerfile -t uninen/python-postgis-mysql:3.14 . --push
 ```
 
 ### node (tags: 24, 22)

@@ -1,5 +1,5 @@
 name: build-postgis-mysql
-run-name: Build Python 3.13 + Postgis + MySQL
+run-name: Build Python 3.14 + Postgis + MySQL
 
 on:
   push:
@@ -37,4 +37,4 @@ jobs:
           file: python-postgis-mysql.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: uninen/python-postgis-mysql:3.13
+          tags: uninen/python-postgis-mysql:3.14
