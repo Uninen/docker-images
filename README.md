@@ -15,7 +15,7 @@ Contributions welcome!
 - Latest `pip`, `uv` or `pip-tools`, PostgreSQL 17 client and essential system packages preinstalled
 - Non-root `duser` user added (home at `/home/duser/`)
 - Python-related environment variables and paths set
-- Based on Debian 12 (bookworm) base image
+- Based on Debian 13 (trixie) base image
 
 See package lists at [sripts/](scripts/) for details of the actual preinstalled packages.
 
@@ -23,11 +23,11 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 | Name                    | Description                                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `python`                | Python, build tools, uv, PosgreSQL dependencies.                                                             |
-| `python-audio`          | Python, build tools, uv, PosgreSQL, tools for audio manipulation.                                            |
-| `python-postgis`        | Python, build tools, PosgreSQL + PostGIS dependencies.                                                       |
-| `python-postgis-mysql ` | Python, build tools, uv, ffmpeg, PosgreSQL + PostGIS + MySQL dependencies.                                   |
-| `python-postgis-node `  | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 24 + pnpm.                               |
+| `python`                | Python, build tools, uv, PostgreSQL 17 dependencies.                                                         |
+| `python-audio`          | Python, build tools, uv, PostgreSQL 17, tools for audio manipulation.                                        |
+| `python-postgis`        | Python, build tools, PostgreSQL + PostGIS dependencies.                                                      |
+| `python-postgis-mysql ` | Python, build tools, uv, ffmpeg, PostgreSQL + PostGIS + MySQL dependencies.                                  |
+| `python-postgis-node `  | Python, build tools, uv, PostgreSQL + PostGIS dependencies, and Node 24 + pnpm.                              |
 | `python-dev`            | Development image based on `python-postgis-node` with Playwright, uv + dev packages.                         |
 | `node`                  | Node 24 and pnpm 10.                                                                                         |
 | `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.13, uv |
@@ -37,7 +37,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 Maintained images and tags:
 
 - `uninen/python-dev:latest` (legacy tags: `3.12`, `3.11`)
-- `uninen/python:3.13` (legacy tags: `3.12`, `3.11`)
+- `uninen/python:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
 - `uninen/python-audio:3.13` (legacy tags: `3.12`)
 - `uninen/python-postgis:3.13` (legacy tags: `3.12`, `3.11`)
 - `uninen/python-postgis-mysql:3.13`
@@ -57,10 +57,14 @@ If you don't yet have a builder ready, first run `docker buildx create --use` th
 docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest . --push
 ```
 
-### python (tags: 3.13, 3.12, 3.11)
+### python (tags: 3.14, 3.13, 3.12, 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-3.13.Dockerfile -t uninen/python:3.13 . --push
+# test
+docker build -f python-3.14.Dockerfile -t uninen/python:3.14 .
+
+# prod
+docker buildx build --platform linux/amd64,linux/arm64 -f python-3.14.Dockerfile -t uninen/python:3.14 . --push
 ```
 
 ### python-audio (tags: 3.13, 3.12)

@@ -3,9 +3,5 @@ name = "py-test-app"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-    "starlette>=0.41.2",
-    "uvicorn>=0.32.0",
-    "zipp>=3.20.2",
-]
+requires-python = ">=3.14"
+dependencies = ["starlette>=0.48.0", "uvicorn>=0.37.0", "zipp>=3.23.0"]
