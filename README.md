@@ -1,6 +1,6 @@
 # Docker Images
 
-Purpose-built images for (audio-related) Python projects.
+Purpose-built opinionated images for (audio-related) Python projects.
 
 These images are mostly based on Python slim, adding a non-root user and basic dependencies needed for most Django / Python / Node projects. The images are designed to be complete and secure enough **for production**.
 
@@ -10,9 +10,8 @@ Contributions welcome!
 
 ## Features
 
-- Slimmer than `python` base images but still include production deps
 - Built for **linux/amd64 and linux/arm64 platforms**
-- Latest `pip`, `uv` or `pip-tools`, PostgreSQL 17 client and essential system packages preinstalled
+- Latest `uv`, PostgreSQL 17 client and essential system packages preinstalled
 - Non-root `duser` user added (home at `/home/duser/`)
 - Python-related environment variables and paths set
 - Based on Debian 13 (trixie) base image
@@ -26,8 +25,8 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | `python`                | Python, build tools, uv, PostgreSQL 17 dependencies.                                                         |
 | `python-audio`          | Python image packages + tools for audio manipulation.                                                        |
 | `python-postgis`        | Python image packages + PostGIS dependencies.                                                                |
-| `python-postgis-mysql ` | Python image packages + PostGIS + MySQL dependencies.                                                        |
-| `python-dev`            | Development image based on `python-postgis-node` with Playwright, uv + dev packages.                         |
+| `python-postgis-mysql ` | Python image packages + PostGIS & MySQL dependencies.                                                        |
+| `python-dev`            | Development image based on `python-postgis` with Node 24, Playwright, uv + dev packages.                     |
 | `node`                  | Node 24 and pnpm 10.                                                                                         |
 | `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.13, uv |
 
@@ -35,11 +34,11 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 Maintained images and tags:
 
-- `uninen/python-dev:latest` (legacy tags: `3.12`, `3.11`)
+- `uninen/python-dev:latest` (legacy tags: `3.13`, `3.12`, `3.11`)
 - `uninen/python:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
 - `uninen/python-audio:3.14` (legacy tags: `3.13`, `3.12`)
 - `uninen/python-postgis:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
-- `uninen/python-postgis-mysql:3.14`
+- `uninen/python-postgis-mysql:3.14` (legacy tags: `3.13`)
 - `uninen/node:24` (legacy tags: `22`, `20`)
 - `uninen/nginx-ffmpeg:latest`
 
@@ -52,6 +51,10 @@ If you don't yet have a builder ready, first run `docker buildx create --use` th
 ### python-dev (tags: latest, 3.12, 3.11)
 
 ```sh
+# test
+docker build -f python-dev.Dockerfile -t uninen/python-dev:latest .
+
+# prod
 docker buildx build --platform linux/amd64,linux/arm64 -f python-dev.Dockerfile -t uninen/python-dev:latest . --push
 ```
 

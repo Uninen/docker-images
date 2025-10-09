@@ -3,7 +3,7 @@ run-name: Push Python DEV
 
 on:
   workflow_run:
-    workflows: [push-postgis-node]
+    workflows: [push-postgis]
     types: [completed]
   workflow_call:
   workflow_dispatch:
