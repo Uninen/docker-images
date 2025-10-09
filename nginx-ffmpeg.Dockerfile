@@ -31,6 +31,9 @@ RUN apt-get update && \
     rm /tmp/deb-multimedia-keyring.deb && \
     apt-get update && \
     apt-get install -y --no-install-recommends -t bookworm-backports \
+    gcc \
+    g++ \
+    build-essential \
     ffmpeg \
     intel-media-va-driver-non-free \
     libva-drm2 \
