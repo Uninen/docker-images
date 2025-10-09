@@ -1,13 +1,13 @@
 name: push-postgis
-run-name: Push Python 3.13 + Postgis
+run-name: Push Python 3.14 + Postgis
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/push-python-postgis-3.13.yml
-      - python-postgis-3.13.Dockerfile
+      - .github/workflows/push-python-postgis-3.14.yml
+      - python-postgis-3.14.Dockerfile
       - scripts/cleanup.sh
       - scripts/install-common.sh
       - scripts/install-postgres-client.sh
@@ -32,7 +32,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6.18.0
         with:
-          file: python-postgis-3.13.Dockerfile
+          file: python-postgis-3.14.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: uninen/python-postgis:3.13
+          tags: uninen/python-postgis:3.14

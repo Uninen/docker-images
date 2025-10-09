@@ -10,5 +10,3 @@ apt update
 dpkg -i "${DEB_FILE}" || apt -f install -y
 
 rm -f "${DEB_FILE}"
-apt clean
-rm -rf /var/lib/apt/lists/*

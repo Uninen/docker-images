@@ -77,10 +77,14 @@ docker build -f python-audio.Dockerfile -t uninen/python-audio:3.14 .
 docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.14 . --push
 ```
 
-### python-postgis (tags: 3.13, 3.12, 3.11)
+### python-postgis (tags: 3.14, 3.13, 3.12, 3.11)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.13.Dockerfile -t uninen/python-postgis:3.13 . --push
+# test
+docker build -f python-postgis-3.14.Dockerfile -t uninen/python-postgis:3.14 .
+
+# prod
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.14.Dockerfile -t uninen/python-postgis:3.14 . --push
 ```
 
 ### python-postgis-mysql (tags: 3.13)
