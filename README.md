@@ -38,7 +38,7 @@ Maintained images and tags:
 
 - `uninen/python-dev:latest` (legacy tags: `3.12`, `3.11`)
 - `uninen/python:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
-- `uninen/python-audio:3.13` (legacy tags: `3.12`)
+- `uninen/python-audio:3.14` (legacy tags: `3.13`, `3.12`)
 - `uninen/python-postgis:3.13` (legacy tags: `3.12`, `3.11`)
 - `uninen/python-postgis-mysql:3.13`
 - `uninen/python-postgis-node:3.13` (legacy tags: `3.12`, `3.11`)
@@ -67,10 +67,14 @@ docker build -f python-3.14.Dockerfile -t uninen/python:3.14 .
 docker buildx build --platform linux/amd64,linux/arm64 -f python-3.14.Dockerfile -t uninen/python:3.14 . --push
 ```
 
-### python-audio (tags: 3.13, 3.12)
+### python-audio (tags: 3.14, 3.13, 3.12)
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.13 . --push
+# test
+docker build -f python-audio.Dockerfile -t uninen/python-audio:3.14 .
+
+# prod
+docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfile -t uninen/python-audio:3.14 . --push
 ```
 
 ### python-postgis (tags: 3.13, 3.12, 3.11)

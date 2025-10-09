@@ -1,17 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-apt update 
-apt -y upgrade 
-apt-get install -y build-essential git make cmake gcc g++ libmad0-dev libid3tag0-dev libsndfile1-dev libgd-dev \
-    libboost-filesystem-dev libboost-program-options-dev libboost-regex-dev 
+AUDIOWAVEFORM_VERSION="1.10.2"
+DEB_FILE="audiowaveform_${AUDIOWAVEFORM_VERSION}-1-13_amd64.deb"
+DEB_URL="https://github.com/bbc/audiowaveform/releases/download/${AUDIOWAVEFORM_VERSION}/${DEB_FILE}"
 
-rm -rf audiowaveform
-git clone https://github.com/bbc/audiowaveform.git
-cd audiowaveform
+wget -q "${DEB_URL}"
+apt update
+dpkg -i "${DEB_FILE}" || apt -f install -y
 
-mkdir build
-cd build
-cmake -D ENABLE_TESTS=0 ..
-make
-make install
+rm -f "${DEB_FILE}"
+apt clean
+rm -rf /var/lib/apt/lists/*
