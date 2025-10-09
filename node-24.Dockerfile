@@ -1,4 +1,4 @@
-FROM bitnami/node:22
+FROM node:24-trixie-slim
 ENV DOCKER_BUILDKIT=1
 ENV PATH="/home/duser/.local/bin:${PATH}"
 ENV DEBIAN_FRONTEND=noninteractive

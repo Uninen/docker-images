@@ -27,9 +27,9 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | `python-audio`          | Python, build tools, uv, PosgreSQL, tools for audio manipulation.                                            |
 | `python-postgis`        | Python, build tools, PosgreSQL + PostGIS dependencies.                                                       |
 | `python-postgis-mysql ` | Python, build tools, uv, ffmpeg, PosgreSQL + PostGIS + MySQL dependencies.                                   |
-| `python-postgis-node `  | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 20 + pnpm.                               |
+| `python-postgis-node `  | Python, build tools, uv, PosgreSQL + PostGIS dependencies, and Node 24 + pnpm.                               |
 | `python-dev`            | Development image based on `python-postgis-node` with Playwright, uv + dev packages.                         |
-| `node`                  | Node 22 and pnpm 10.                                                                                         |
+| `node`                  | Node 24 and pnpm 10.                                                                                         |
 | `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.13, uv |
 
 ## Using
@@ -42,7 +42,7 @@ Maintained images and tags:
 - `uninen/python-postgis:3.13` (legacy tags: `3.12`, `3.11`)
 - `uninen/python-postgis-mysql:3.13`
 - `uninen/python-postgis-node:3.13` (legacy tags: `3.12`, `3.11`)
-- `uninen/node:22` (legacy tags: `20`)
+- `uninen/node:24` (legacy tags: `22`, `20`)
 - `uninen/nginx-ffmpeg:latest`
 
 See `py-test-app/` for example usage in a project.
@@ -87,13 +87,13 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-mysql.D
 docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-node.Dockerfile -t uninen/python-postgis-node:3.13 . --push
 ```
 
-### node (tags: 22, 20)
+### node (tags: 24, 22)
 
 ```sh
 # test
-docker build -f node-22.Dockerfile -t uninen/node:22 .
+docker build -f node-24.Dockerfile -t uninen/node:24 .
 # prod
-docker buildx build --platform linux/amd64,linux/arm64 -f node-22.Dockerfile -t uninen/node:22 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f node-24.Dockerfile -t uninen/node:24 . --push
 ```
 
 ### nginx-ffmpeg (tags: latest)

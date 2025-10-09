@@ -1,18 +1,18 @@
-name: Build Node 22
+name: Push Node 24
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
-      - .github/workflows/build-node-22.yml
-      - .github/workflows/push-node-22.yml
-      - node-22.Dockerfile
+      - .github/workflows/push-node-24.yml
+      - node-24.Dockerfile
       - scripts/cleanup.sh
       - scripts/install-common.sh
       - scripts/prep-node.sh
-
-concurrency:
-  group: build-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
+  schedule:
+    - cron: 35 5 22 * * # every 22nd on 5.35 UTC
+  workflow_dispatch:
 
 jobs:
   build_and_push:
@@ -27,10 +27,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build
+      - name: Build and push
         uses: docker/build-push-action@v6.18.0
         with:
-          file: node-22.Dockerfile
+          file: node-24.Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: false
-          tags: uninen/node:22
+          push: true
+          tags: uninen/node:24
