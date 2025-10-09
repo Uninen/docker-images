@@ -28,7 +28,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | `python-postgis-mysql ` | Python image packages + PostGIS & MySQL dependencies.                                                        |
 | `python-dev`            | Development image based on `python-postgis` with Node 24, Playwright, uv + dev packages.                     |
 | `node`                  | Node 24 and pnpm 10.                                                                                         |
-| `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.13, uv |
+| `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.14, uv |
 
 ## Using
 
@@ -40,7 +40,7 @@ Maintained images and tags:
 - `uninen/python-postgis:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
 - `uninen/python-postgis-mysql:3.14` (legacy tags: `3.13`)
 - `uninen/node:24` (legacy tags: `22`, `20`)
-- `uninen/nginx-ffmpeg:latest`
+- `uninen/nginx-ffmpeg:latest` (legacy tags: `3.13`)
 
 See `py-test-app/` for example usage in a project.
 
@@ -107,7 +107,7 @@ docker build -f node-24.Dockerfile -t uninen/node:24 .
 docker buildx build --platform linux/amd64,linux/arm64 -f node-24.Dockerfile -t uninen/node:24 . --push
 ```
 
-### nginx-ffmpeg (tags: latest)
+### nginx-ffmpeg (tags: latest, 3.13)
 
 ```sh
 # test

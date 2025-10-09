@@ -9,7 +9,7 @@ ARG RTMP_PORT=1935
 
 ###################################################
 # Base image (Runtime dependencies)
-FROM python:3.13.5-slim-bookworm AS base-image
+FROM python:3.14.0-slim-bookworm AS base-image
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
