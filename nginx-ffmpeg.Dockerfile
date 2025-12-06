@@ -1,4 +1,4 @@
-# Version: 2025.04.1
+# Version: 2025.12
 ARG NGINX_VERSION=1.28.0
 # https://nginx.org/en/download.html
 ARG HTTP_FLV_MODULE_VERSION=1.2.12
@@ -9,35 +9,36 @@ ARG RTMP_PORT=1935
 
 ###################################################
 # Base image (Runtime dependencies)
-FROM python:3.14.0-slim-bookworm AS base-image
+FROM python:3.14.1-slim-trixie AS base-image
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1
 
-# FFmpeg 6.1.2
-# https://www.deb-multimedia.org/dists/stable-backports/main/binary-amd64/package/ffmpeg
+# FFmpeg 8.x
+# https://www.deb-multimedia.org/dists/trixie-backports/main/binary-amd64/package/ffmpeg
 # https://ffmpeg.org/index.html#news
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget gnupg ca-certificates libpcre3 moreutils && \
-    echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
-    echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
-    echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
-    echo "deb http://www.deb-multimedia.org bookworm main non-free" > /etc/apt/sources.list.d/deb-multimedia.list && \
-    echo "deb http://www.deb-multimedia.org bookworm-backports main" >> /etc/apt/sources.list.d/deb-multimedia.list && \
+    apt-get install -y --no-install-recommends wget gnupg gpgv ca-certificates libpcre2-8-0 moreutils && \
+    echo "deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian-security/ trixie-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb http://www.deb-multimedia.org trixie main non-free" > /etc/apt/sources.list.d/deb-multimedia.list && \
+    echo "deb http://www.deb-multimedia.org trixie-backports main" >> /etc/apt/sources.list.d/deb-multimedia.list && \
     wget --no-verbose https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb -O /tmp/deb-multimedia-keyring.deb && \
     dpkg -i /tmp/deb-multimedia-keyring.deb && \
     rm /tmp/deb-multimedia-keyring.deb && \
     apt-get update && \
-    apt-get install -y --no-install-recommends -t bookworm-backports \
+    apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     build-essential \
-    ffmpeg \
-    intel-media-va-driver-non-free \
-    libva-drm2 \
-    libmfx1 && \
+    libva-drm2 && \
+    if [ "$(dpkg --print-architecture)" = "amd64" ]; then \
+    apt-get install -y --no-install-recommends intel-media-va-driver-non-free libmfx-gen1.2; \
+    fi && \
+    apt-get install -y --no-install-recommends -t trixie-backports ffmpeg && \
     apt-get purge -y --auto-remove wget gnupg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /root/.cache
@@ -49,10 +50,10 @@ RUN uv --version
 
 ###################################################
 # Build dependencies image
-FROM debian:bookworm-slim AS build-deps
+FROM debian:trixie-slim AS build-deps
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget ca-certificates g++ make openssl libssl-dev zlib1g-dev libpcre3-dev && \
+    apt-get install -y --no-install-recommends wget ca-certificates g++ make openssl libssl-dev zlib1g-dev libpcre2-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
