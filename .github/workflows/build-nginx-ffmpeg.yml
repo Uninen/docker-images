@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build
-        uses: docker/build-push-action@v6.18.0
+        uses: docker/build-push-action@v6.19.1
         with:
           file: nginx-ffmpeg.Dockerfile
           platforms: linux/amd64
