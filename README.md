@@ -29,6 +29,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 | `python-dev`            | Development image based on `python-postgis` with Node 24, Playwright, uv + dev packages.                     |
 | `node`                  | Node 24 and pnpm 10.                                                                                         |
 | `nginx-ffmpeg`          | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.14, uv |
+| `postgis-pgvector`      | PostgreSQL 18 based on [kartoza/docker-postgis](https://github.com/kartoza/docker-postgis) + pgvector        |
 
 ## Using
 
@@ -41,6 +42,7 @@ Maintained images and tags:
 - `uninen/python-postgis-mysql:3.14` (legacy tags: `3.13`)
 - `uninen/node:24` (legacy tags: `22`, `20`)
 - `uninen/nginx-ffmpeg:latest` (legacy tags: `3.13`)
+- `uninen/postgis-pgvector:latest`
 
 See `py-test-app/` for example usage in a project.
 
@@ -116,6 +118,15 @@ docker buildx build --platform linux/amd64 -f nginx-ffmpeg.Dockerfile -t uninen/
 docker buildx build --platform linux/amd64 -f nginx-ffmpeg.Dockerfile -t uninen/nginx-ffmpeg:latest . --push
 ```
 
+### postgis-pgvector (tags: latest)
+
+```sh
+# test
+docker build -f postgis-pgvector.Dockerfile -t uninen/postgis-pgvector:latest .
+# prod
+docker buildx build --platform linux/amd64,linux/arm64 -f postgis-pgvector.Dockerfile -t uninen/postgis-pgvector:latest . --push
+```
+
 ## Testing
 
 ```sh
@@ -134,4 +145,4 @@ docker compose up
 
 ---
 
-Follow [@Uninen on Twitter](https://twitter.com/uninen) | [GitHub](https://github.com/Uninen)
+Follow [@Uninen on X](https://x.com/uninen), [uninen.net on Bluesky](https://bsky.app/profile/uninen.net)

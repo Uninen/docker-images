@@ -13,6 +13,9 @@ on:
       - scripts/install-mysql.sh
       - scripts/install-postgres-client.sh
       - scripts/prep-postgis-mysql.sh
+  schedule:
+    - cron: 59 4 22 * * # every 22nd
+  workflow_dispatch:
 
 concurrency:
   group: push-postgis-mysql-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
