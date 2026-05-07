@@ -11,7 +11,7 @@ Contributions welcome!
 ## Features
 
 - Built for **linux/amd64 and linux/arm64 platforms**
-- Latest `uv`, PostgreSQL 17 client and essential system packages preinstalled
+- Latest `uv`, PostgreSQL 18 client and essential system packages preinstalled
 - Non-root `duser` user added (home at `/home/duser/`)
 - Python-related environment variables and paths set
 - Based on Debian 13 (trixie) base image
@@ -22,7 +22,7 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 | Name                    | Description                                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `python`                | Python, build tools, uv, PostgreSQL 17 dependencies.                                                         |
+| `python`                | Python, build tools, uv, PostgreSQL 18 dependencies.                                                         |
 | `python-audio`          | Python image packages + tools for audio manipulation.                                                        |
 | `python-postgis`        | Python image packages + PostGIS dependencies.                                                                |
 | `python-postgis-mysql ` | Python image packages + PostGIS & MySQL dependencies.                                                        |
