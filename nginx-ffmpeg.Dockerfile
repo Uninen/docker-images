@@ -1,5 +1,5 @@
-# Version: 2025.12
-ARG NGINX_VERSION=1.28.2
+# Version: 2026.6
+ARG NGINX_VERSION=1.31.1
 # https://nginx.org/en/download.html
 ARG HTTP_FLV_MODULE_VERSION=1.2.13
 # https://github.com/winshining/nginx-http-flv-module/releases
