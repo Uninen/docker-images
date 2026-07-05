@@ -1,7 +1,7 @@
 # Version: 2026.6
-ARG NGINX_VERSION=1.31.1
+ARG NGINX_VERSION=1.31.2
 # https://nginx.org/en/download.html
-ARG HTTP_FLV_MODULE_VERSION=1.2.13
+ARG HTTP_FLV_MODULE_VERSION=1.2.14
 # https://github.com/winshining/nginx-http-flv-module/releases
 ARG HTTP_PORT=8099
 ARG HTTPS_PORT=4435
