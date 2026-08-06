@@ -9,7 +9,7 @@ ARG RTMP_PORT=1935
 
 ###################################################
 # Base image (Runtime dependencies)
-FROM python:3.14.6-slim-trixie AS base-image
+FROM python:3.14.7-slim-trixie AS base-image
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
