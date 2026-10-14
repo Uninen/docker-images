@@ -1,10 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-apt remove --allow-remove-essential --purge -y -qq
-apt autoremove -y
-apt clean -y
+apt-get autoremove --purge -y -o APT::AutoRemove::RecommendsImportant=false
+apt-get clean
 
-rm -rf /var/cache/apt/*
-rm -rf /var/lib/apt/lists/*
-rm -rf /root/.cache
+rm -rf /var/cache/apt/* /var/lib/apt/lists/* /root/.cache

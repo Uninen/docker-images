@@ -1,9 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-apt update
-apt install -y gpg apt-transport-https ca-certificates
-
-apt update
-apt -y upgrade 
-apt -y install --no-install-recommends git nano curl wget gnupg2 ssh gcc g++ build-essential
+apt-get update
+apt-get -y upgrade
+apt-get -y install --no-install-recommends ca-certificates git nano curl wget openssh-client build-essential

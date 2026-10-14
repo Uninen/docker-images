@@ -1,5 +1,5 @@
 # Version: 2026.6
-ARG NGINX_VERSION=1.31.2
+ARG NGINX_VERSION=1.31.6
 # https://nginx.org/en/download.html
 ARG HTTP_FLV_MODULE_VERSION=1.2.14
 # https://github.com/winshining/nginx-http-flv-module/releases
@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1
 
-# FFmpeg 8.x
+# FFmpeg 9.x
 # https://www.deb-multimedia.org/dists/trixie-backports/main/binary-amd64/package/ffmpeg
 # https://ffmpeg.org/index.html#news
 RUN apt-get update && \

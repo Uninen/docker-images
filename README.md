@@ -33,9 +33,9 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 Maintained images and tags:
 
-- `uninen/python:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
+- `uninen/python:3.15` (legacy tags: `3.14`, `3.13`, `3.12`, `3.11`)
 - `uninen/python-audio:3.14` (legacy tags: `3.13`, `3.12`)
-- `uninen/python-postgis:3.14` (legacy tags: `3.13`, `3.12`, `3.11`)
+- `uninen/python-postgis:3.15` (legacy tags: `3.14`, `3.13`, `3.12`, `3.11`)
 - `uninen/node:24` (legacy tags: `22`, `20`)
 - `uninen/nginx-ffmpeg:latest` (legacy tags: `3.13`)
 - `uninen/postgis-pgvector:latest`
@@ -44,14 +44,14 @@ Maintained images and tags:
 
 If you don't yet have a builder ready, first run `docker buildx create --use` then;
 
-### python (tags: 3.14, 3.13, 3.12, 3.11)
+### python (tags: 3.15, 3.14, 3.13, 3.12, 3.11)
 
 ```sh
 # test
-docker build -f python-3.14.Dockerfile -t uninen/python:3.14 .
+docker build -f python-3.15.Dockerfile -t uninen/python:3.15 .
 
 # prod
-docker buildx build --platform linux/amd64,linux/arm64 -f python-3.14.Dockerfile -t uninen/python:3.14 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-3.15.Dockerfile -t uninen/python:3.15 . --push
 ```
 
 ### python-audio (tags: 3.14, 3.13, 3.12)
@@ -68,10 +68,10 @@ docker buildx build --platform linux/amd64,linux/arm64 -f python-audio.Dockerfil
 
 ```sh
 # test
-docker build -f python-postgis-3.14.Dockerfile -t uninen/python-postgis:3.14 .
+docker build -f python-postgis-3.15.Dockerfile -t uninen/python-postgis:3.15 .
 
 # prod
-docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.14.Dockerfile -t uninen/python-postgis:3.14 . --push
+docker buildx build --platform linux/amd64,linux/arm64 -f python-postgis-3.15.Dockerfile -t uninen/python-postgis:3.15 . --push
 ```
 
 ### node (tags: 24, 22)
