@@ -1,4 +1,4 @@
-FROM node:24-trixie-slim
+FROM node:26-trixie-slim
 ENV DOCKER_BUILDKIT=1
 ENV PATH="/home/duser/.local/bin:${PATH}"
 ENV DEBIAN_FRONTEND=noninteractive
