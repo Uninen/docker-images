@@ -1,7 +1,7 @@
-# Version: 2026.6
-ARG NGINX_VERSION=1.31.6
+# Version: 2026.11
+ARG NGINX_VERSION=1.31.8
 # https://nginx.org/en/download.html
-ARG HTTP_FLV_MODULE_VERSION=1.2.14
+ARG HTTP_FLV_MODULE_VERSION=1.2.15
 # https://github.com/winshining/nginx-http-flv-module/releases
 ARG HTTP_PORT=8099
 ARG HTTPS_PORT=4435
@@ -9,7 +9,7 @@ ARG RTMP_PORT=1935
 
 ###################################################
 # Base image (Runtime dependencies)
-FROM python:3.14.7-slim-trixie AS base-image
+FROM python:3.15.2-slim-trixie AS base-image
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
