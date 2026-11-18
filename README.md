@@ -20,14 +20,14 @@ See package lists at [sripts/](scripts/) for details of the actual preinstalled 
 
 ## Images
 
-| Name               | Description                                                                                                  |
-| ------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `python`           | Python, build tools, uv, PostgreSQL 18 dependencies.                                                         |
-| `python-audio`     | Python image packages + tools for audio manipulation.                                                        |
-| `python-postgis`   | Python image packages + PostGIS dependencies.                                                                |
-| `node`             | Node 24 and pnpm 10.                                                                                         |
-| `nginx-ffmpeg`     | Nginx, nginx-http-flv-module, ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.14, uv |
-| `postgis-pgvector` | PostgreSQL 18 based on [kartoza/docker-postgis](https://github.com/kartoza/docker-postgis) + pgvector        |
+| Name               | Description                                                                                                                                                    |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `python`           | Python, build tools, uv, PostgreSQL 18 dependencies.                                                                                                           |
+| `python-audio`     | Python image packages + tools for audio manipulation.                                                                                                          |
+| `python-postgis`   | Python image packages + PostGIS dependencies.                                                                                                                  |
+| `node`             | Node 24 and pnpm 10.                                                                                                                                           |
+| `nginx-ffmpeg`     | Nginx, [slipmat-rtmp-module](https://github.com/slipmatio/slipmat-rtmp-module), ffmpeg from [deb-multimedia](https://www.deb-multimedia.org/), Python 3.15, uv |
+| `postgis-pgvector` | PostgreSQL 18 based on [kartoza/docker-postgis](https://github.com/kartoza/docker-postgis) + pgvector                                                          |
 
 ## Using
 

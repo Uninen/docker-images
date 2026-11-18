@@ -1,8 +1,9 @@
 # Version: 2026.11
-ARG NGINX_VERSION=1.31.8
+ARG NGINX_VERSION=1.31.9
 # https://nginx.org/en/download.html
-ARG HTTP_FLV_MODULE_VERSION=1.2.15
-# https://github.com/winshining/nginx-http-flv-module/releases
+ARG RTMP_MODULE_COMMIT=5eee0d0ada088b29f099faa1f58ed4b77ffa4432
+ARG RTMP_MODULE_SHA256=7b14149eb7bcb8c9722ad27f30c3068199730bddd4602cd926a86cca0ccba45f
+# https://github.com/slipmatio/slipmat-rtmp-module/commits/master
 ARG HTTP_PORT=8099
 ARG HTTPS_PORT=4435
 ARG RTMP_PORT=1935
@@ -62,7 +63,8 @@ RUN apt-get update && \
 FROM build-deps AS build-stage
 
 ARG NGINX_VERSION
-ARG HTTP_FLV_MODULE_VERSION
+ARG RTMP_MODULE_COMMIT
+ARG RTMP_MODULE_SHA256
 
 # Hardcode optimizations for Intel Skylake (Xeon E3-1275v5 target)
 ENV MAKEFLAGS="-j$(nproc)" \
@@ -73,8 +75,9 @@ ENV MAKEFLAGS="-j$(nproc)" \
 RUN cd /tmp && \
     wget --no-verbose https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
     && tar -zxvf nginx-${NGINX_VERSION}.tar.gz \
-    && wget --no-verbose https://github.com/winshining/nginx-http-flv-module/archive/refs/tags/v${HTTP_FLV_MODULE_VERSION}.tar.gz \
-    && tar -zxvf v${HTTP_FLV_MODULE_VERSION}.tar.gz
+    && wget --no-verbose -O rtmp-module.tar.gz https://github.com/slipmatio/slipmat-rtmp-module/archive/${RTMP_MODULE_COMMIT}.tar.gz \
+    && echo "${RTMP_MODULE_SHA256}  rtmp-module.tar.gz" | sha256sum -c - \
+    && tar -zxvf rtmp-module.tar.gz
 
 RUN set -eux; \
     cd /tmp/nginx-${NGINX_VERSION}; \
@@ -83,7 +86,7 @@ RUN set -eux; \
     echo "LDFLAGS: ${LDFLAGS}"; \
     ./configure \
     --prefix=/usr/local/nginx \
-    --add-module=/tmp/nginx-http-flv-module-${HTTP_FLV_MODULE_VERSION} \
+    --add-module=/tmp/slipmat-rtmp-module-${RTMP_MODULE_COMMIT} \
     --conf-path=/etc/nginx/nginx.conf \
     --with-threads \
     --with-file-aio \
@@ -97,7 +100,7 @@ RUN set -eux; \
     make; \
     make install; \
     strip /usr/local/nginx/sbin/nginx; \
-    rm -rf /tmp/nginx-${NGINX_VERSION} /tmp/nginx-http-flv-module-${HTTP_FLV_MODULE_VERSION} /tmp/*.tar.gz
+    rm -rf /tmp/nginx-${NGINX_VERSION} /tmp/slipmat-rtmp-module-${RTMP_MODULE_COMMIT} /tmp/*.tar.gz
 
 #######################################
 # Final image
