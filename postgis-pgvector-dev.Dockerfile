@@ -1,4 +1,4 @@
-FROM postgres:18-alpine AS builder
+FROM postgres:19-alpine AS builder
 
 RUN apk add --no-cache \
     build-base \
@@ -58,7 +58,7 @@ RUN git clone --branch v1.2.5 --depth 1 https://github.com/pgpointcloud/pointclo
     && make install
 
 # --- Final stage ---
-FROM postgres:18-alpine
+FROM postgres:19-alpine
 
 # Minimal runtime deps
 RUN apk add --no-cache \
